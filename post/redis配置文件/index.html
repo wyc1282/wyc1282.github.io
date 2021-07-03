@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Redis配置文件详解 - 野生猿的笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Wang" /><meta name="description" content="redis配置文件" /><meta name="keywords" content="redis, 配置文件, 数据库" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
+
+
+<link rel="canonical" href="https://wyc1282.github.io/post/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.2e81bbed97b8b282c1aeb57488cc71c8d8c8ec559f3931531bd396bf31e0d4dd.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Redis配置文件详解" />
+<meta property="og:description" content="redis配置文件" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wyc1282.github.io/post/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-03T11:32:21&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-03T11:32:21&#43;08:00" />
+
+<meta itemprop="name" content="Redis配置文件详解">
+<meta itemprop="description" content="redis配置文件"><meta itemprop="datePublished" content="2021-07-03T11:32:21&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-03T11:32:21&#43;08:00" />
+<meta itemprop="wordCount" content="2937">
+<meta itemprop="keywords" content="redis,配置文件,数据库," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Redis配置文件详解"/>
+<meta name="twitter:description" content="redis配置文件"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Wang</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">档案</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">类别</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Wang</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">档案</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">类别</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Redis配置文件详解</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-03 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"> 配置文件 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#redis配置文件">redis配置文件</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <hr>
+<h1 id="redis配置文件">redis配置文件</h1>
+<p>redis默认配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 额外载入配置文件。</span>
+<span class="c1"># include /path/to/local.conf</span>
+<span class="c1"># include /path/to/other.conf</span>
+
+<span class="c1"># 载入模块</span>
+<span class="c1"># loadmodule /path/to/my_module.so</span>
+<span class="c1"># loadmodule /path/to/other_module.so</span>
+
+<span class="c1"># 指定Redis 只接收来自于该IP 地址的请求，如果不进行设置，那么将处理所有请求，在生产环境中为了安全最好设置该项。默认注释掉，不开启</span>
+<span class="nb">bind</span> 127.0.0.1
+
+<span class="c1">#受保护模式</span>
+protected-mode yes
+
+<span class="c1">#监听端口，默认为6379</span>
+port <span class="m">6379</span>
+
+tcp-backlog <span class="m">511</span>
+
+<span class="c1">#设置客户端连接时的超时时间，单位为秒。当客户端在这段时间内没有发出任何指令，那么关闭该连接</span>
+timeout <span class="m">0</span>
+
+<span class="c1">#指定TCP连接是否为长连接,&#34;侦探&#34;信号有server端维护。默认为0.表示禁用</span>
+tcp-keepalive <span class="m">300</span>
+
+<span class="c1">#默认情况下，redis 不是在后台运行的，如果需要在后台运行，把该项的值更改为yes。</span>
+daemonize no
+
+supervised no
+
+pidfile /var/run/redis_6379.pid
+
+<span class="c1"># log 等级分为4 级，debug,verbose, notice, 和warning。生产环境下一般开启notice</span>
+loglevel notice
+
+logfile <span class="s2">&#34;&#34;</span>
+
+<span class="c1"># syslog-enabled no</span>
+
+<span class="c1"># syslog-ident redis</span>
+
+<span class="c1"># syslog-facility local0</span>
+
+<span class="c1"># 设置数据库的个数，可以使用SELECT 命令来切换数据库。默认使用的数据库是0号库。默认16个库</span>
+databases <span class="m">16</span>
+
+<span class="c1">#logo显示</span>
+always-show-logo yes
+
+<span class="c1"># 保存数据快照的频率，即将数据持久化到dump.rdb文件中的频度。用来描述&#34;在多少秒期间至少多少个变更操作&#34;触发snapshot数据保存动作</span>
+save <span class="m">900</span> <span class="m">1</span>
+save <span class="m">300</span> <span class="m">10</span>
+save <span class="m">60</span> <span class="m">10000</span>
+
+<span class="c1"># 当持久化出现错误时，是否依然继续进行工作，是否终止所有的客户端write请求。默认设置&#34;yes&#34;表示终止，一旦snapshot数据保存故障，那么此server为只读服务。如果为&#34;no&#34;，那么此次snapshot将失败，但下一次snapshot不会受到影响，不过如果出现故障,数据只能恢复到&#34;最近一个成功点&#34;</span>
+stop-writes-on-bgsave-error yes
+
+<span class="c1"># 在进行数据镜像备份时，是否启用rdb文件压缩手段，默认为yes。压缩可能需要额外的cpu开支，不过这能够有效的减小rdb文件的大，有利于存储/备份/传输/数据恢复</span>
+rdbcompression yes
+
+<span class="c1"># 读取和写入同时进行，会损失10%性能</span>
+rdbchecksum yes
+
+<span class="c1"># 镜像备份文件的文件名，默认为 dump.rdb</span>
+dbfilename dump.rdb
+
+<span class="c1"># 数据库镜像备份的文件rdb/AOF文件放置的路径。这里的路径跟文件名要分开配置是因为Redis 在进行备份时，先会将当前数据库的状态写入到一个临时文件中，等备份完成时，再把该临时文件替换为上面所指定的文件，而这里的临时文件和上面所配置的备份文件都会放在这个指定的路径当中</span>
+dir ./
+
+<span class="c1"># 设置该数据库为其他数据库的从数据库，并为其指定master信息</span>
+<span class="c1"># replicaof &lt;masterip&gt; &lt;masterport&gt;</span>
+
+<span class="c1">#主服务器密码</span>
+<span class="c1"># masterauth &lt;master-password&gt;</span>
+
+<span class="c1"># 当主master服务器挂机或主从复制在进行时，是否依然可以允许客户访问可能过期的数据。在&#34;yes&#34;情况下,slave继续向客户端提供只读服务,有可能此时的数据已经过期；在&#34;no&#34;情况下，任何向此server发送的数据请求服务(包括客户端和此server的slave)都将被告知&#34;error&#34;</span>
+replica-serve-stale-data yes
+
+<span class="c1"># 从服务器是否为&#34;只读&#34;，强烈建议为&#34;yes&#34;</span>
+replica-read-only yes
+
+<span class="c1"># 从服务器无盘同步</span>
+repl-diskless-sync no
+
+<span class="c1"># 从服务器无盘同步延时</span>
+repl-diskless-sync-delay <span class="m">5</span>
+
+
+<span class="c1"># 从服向指定的主服发送ping消息的时间间隔(秒)，默认为10</span>
+<span class="c1"># repl-ping-replica-period 10</span>
+
+<span class="c1"># 从服向指定的主服发送ping消息的超时时间</span>
+<span class="c1"># repl-timeout 60</span>
+
+<span class="c1"># slave与master的连接,是否禁用TCP nodelay选项。&#34;yes&#34;表示禁用,那么socket通讯中数据将会以packet方式发送(packet大小受到socket buffer限制)。</span>
+repl-disable-tcp-nodelay no
+
+<span class="c1"># 返回日志大小</span>
+<span class="c1"># repl-backlog-size 1mb</span>
+<span class="c1"># repl-backlog-ttl 3600</span>
+
+replica-priority <span class="m">100</span>
+
+<span class="c1"># min-replicas-to-write 3</span>
+<span class="c1"># min-replicas-max-lag 10</span>
+<span class="c1"># replica-announce-ip 5.5.5.5</span>
+<span class="c1"># replica-announce-port 1234</span>
+
+<span class="c1">#设置密码</span>
+<span class="c1"># requirepass foobared  </span>
+
+<span class="c1"># rename-command CONFIG &#34;&#34;</span>
+<span class="c1"># maxclients 10000</span>
+<span class="c1"># maxmemory &lt;bytes&gt;</span>
+<span class="c1"># LRU means Least Recently Used</span>
+<span class="c1"># LFU means Least Frequently Used</span>
+<span class="c1"># maxmemory-policy noeviction</span>
+<span class="c1"># maxmemory-samples 5</span>
+<span class="c1"># replica-ignore-maxmemory yes</span>
+
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+
+<span class="c1"># 默认情况下，redis 会在后台异步的把数据库镜像备份到磁盘，但是该备份是非常耗时的，而且备份也不能很频繁。所以redis 提供了另外一种更加高效的数据库备份及灾难恢复方式。开启append only 模式之后，redis 会把所接收到的每一次写操作请求都追加到appendonly.aof 文件中，当redis 重新启动时，会从该文件恢复出之前的状态。但是这样会造成appendonly.aof 文件过大，所以redis 还支持了BGREWRITEAOF 指令，对appendonly.aof 进行重新整理。如果不经常进行数据迁移操作，推荐生产环境下的做法为关闭镜像，开启appendonly.aof，同时可以选择在访问较少的时间每天对appendonly.aof 进行重写一次.</span>
+appendonly no
+
+<span class="c1"># aof文件名字，默认为appendonly.aof</span>
+appendfilename <span class="s2">&#34;appendonly.aof&#34;</span>
+
+<span class="c1"># 设置对appendonly.aof 文件进行同步的频率。always 表示每次有写操作都进行同步，everysec 表示对写操作进行累积，每秒同步一次。no不主动fsync，由OS自己来完成。这个需要根据实际业务场景进行配置</span>
+<span class="c1"># appendfsync always</span>
+appendfsync everysec
+<span class="c1"># appendfsync no</span>
+
+<span class="c1"># 在aof rewrite期间,是否对aof新记录的append暂缓使用文件同步策略,主要考虑磁盘IO开支和请求阻塞时间。默认为no,表示&#34;不暂缓&#34;,新的aof记录仍然会被立即同步</span>
+no-appendfsync-on-rewrite no
+
+<span class="c1"># 当Aof log增长超过指定比例时，重写log file， 设置为0表示不自动重写Aof 日志，重写是为了使aof体积保持最小，而确保保存最完整的数据,触发aof rewrite的最小文件尺寸</span>
+auto-aof-rewrite-percentage <span class="m">100</span>
+auto-aof-rewrite-min-size 64mb
+
+
+aof-load-truncated yes
+
+aof-use-rdb-preamble yes
+
+<span class="c1"># lua脚本运行的最大时间</span>
+lua-time-limit <span class="m">5000</span>
+
+<span class="c1"># 集群设置</span>
+<span class="c1"># cluster-enabled yes</span>
+<span class="c1"># cluster-config-file nodes-6379.conf</span>
+<span class="c1"># cluster-node-timeout 15000</span>
+<span class="c1"># cluster-replica-validity-factor 10</span>
+<span class="c1"># cluster-migration-barrier 1</span>
+<span class="c1"># cluster-require-full-coverage yes</span>
+<span class="c1"># cluster-replica-no-failover no</span>
+<span class="c1"># cluster-announce-ip 10.1.1.5</span>
+<span class="c1"># cluster-announce-port 6379</span>
+<span class="c1"># cluster-announce-bus-port 6380</span>
+
+<span class="c1"># &#34;慢操作日志&#34;记录,单位:微秒(百万分之一秒,1000 * 1000),如果操作时间超过此值,将会把command信息&#34;记录&#34;起来.(内存,非文件)。其中&#34;操作时间&#34;不包括网络IO开支,只包括请求达到server后进行&#34;内存实施&#34;的时间.&#34;0&#34;表示记录全部操作</span>
+slowlog-log-slower-than <span class="m">10000</span>
+
+<span class="c1"># &#34;慢操作日志&#34;保留的最大条数,&#34;</span>
+slowlog-max-len <span class="m">128</span>
+
+
+latency-monitor-threshold <span class="m">0</span>
+
+<span class="c1"># PUBLISH __keyspace@0__:foo del</span>
+<span class="c1"># PUBLISH __keyevent@0__:del foo</span>
+
+notify-keyspace-events <span class="s2">&#34;&#34;</span>
+
+<span class="c1"># hash类型的数据结构在编码上可以使用ziplist和hashtable。</span>
+hash-max-ziplist-entries <span class="m">512</span>
+<span class="c1"># ziplist中允许条目value值最大字节数，默认为64，建议为1024</span>
+hash-max-ziplist-value <span class="m">64</span>
+
+<span class="c1"># 对于list类型,将会采取ziplist,linkedlist两种编码类型。</span>
+list-max-ziplist-size -2
+list-compress-depth <span class="m">0</span>
+
+set-max-intset-entries <span class="m">512</span>
+
+<span class="c1"># zset为有序集合,有2中编码类型:ziplist,skiplist。因为&#34;排序&#34;将会消耗额外的性能,当zset中数据较多时,将会被重构为skiplist。</span>
+zset-max-ziplist-entries <span class="m">128</span>
+zset-max-ziplist-value <span class="m">64</span>
+
+hll-sparse-max-bytes <span class="m">3000</span>
+
+stream-node-max-bytes <span class="m">4096</span>
+stream-node-max-entries <span class="m">100</span>
+
+activerehashing yes
+
+client-output-buffer-limit normal <span class="m">0</span> <span class="m">0</span> <span class="m">0</span>
+client-output-buffer-limit replica 256mb 64mb <span class="m">60</span>
+client-output-buffer-limit pubsub 32mb 8mb <span class="m">60</span>
+
+<span class="c1"># Redis server执行后台任务的频率,默认为10,</span>
+hz <span class="m">10</span>
+
+dynamic-hz yes
+
+aof-rewrite-incremental-fsync yes
+rdb-save-incremental-fsync yes
+
+<span class="c1"># lfu-log-factor 10</span>
+<span class="c1"># lfu-decay-time 1</span>
+<span class="c1"># activedefrag yes</span>
+<span class="c1"># active-defrag-ignore-bytes 100mb</span>
+<span class="c1"># active-defrag-threshold-lower 10</span>
+<span class="c1"># active-defrag-threshold-upper 100</span>
+<span class="c1"># active-defrag-cycle-min 5</span>
+<span class="c1"># active-defrag-cycle-max 75</span>
+<span class="c1"># active-defrag-max-scan-fields 1000</span>
+<span class="c1"># server_cpulist 0-7:2</span>
+<span class="c1"># bio_cpulist 1,3</span>
+<span class="c1"># aof_rewrite_cpulist 8-11</span>
+<span class="c1"># bgsave_cpulist 1,10-11</span>
+<span class="c1"># ignore-warnings ARM64-COW-BUG</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/redis/">redis</a>
+          <a href="/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">配置文件</a>
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">MySQL配置文详解</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B22/">
+            <span class="next-text nav-default">Docker环境下的前后端分离项目部署(二)</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'xejwJ1mqtIJ6JAnKlCXzHODQ-gzGzoHsz',
+        appKey: 'WGB8ABQxGRsIT5gndRGMIMxg',
+        notify:  false ,
+        verify:  false ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://wyc1282.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Wang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

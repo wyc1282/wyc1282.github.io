@@ -1,0 +1,312 @@
+<?xml-stylesheet type="text/xsl" href="https://wyc1282.github.io/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://wyc1282.github.io/categories/</loc>
+    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/mysql/</loc>
+    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/</loc>
+    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/</loc>
+    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/categories/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/</loc>
+    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/redis/</loc>
+    <lastmod>2021-07-03T11:32:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2021-07-03T11:32:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B22/</loc>
+    <lastmod>2021-07-02T21:59:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/windows2008r2%E9%85%8D%E7%BD%AEiis%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/</loc>
+    <lastmod>2021-06-30T13:51:49+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/docker/</loc>
+    <lastmod>2021-06-27T20:23:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/</loc>
+    <lastmod>2021-06-27T20:23:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/maven/</loc>
+    <lastmod>2021-06-27T20:23:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/node.js/</loc>
+    <lastmod>2021-06-27T20:23:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/vm/</loc>
+    <lastmod>2021-06-27T20:23:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/categories/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2021-06-27T20:23:19+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/ruoyi/</loc>
+    <lastmod>2021-06-25T08:13:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/%E5%A4%9A%E5%AE%9E%E4%BE%8B/</loc>
+    <lastmod>2021-06-25T08:13:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/%E5%BC%80%E6%BA%90%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AEruoyi%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A4%9A%E5%AE%9E%E4%BE%8B%E9%83%A8%E7%BD%B2/</loc>
+    <lastmod>2021-06-25T08:13:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/%E8%8B%A5%E4%BE%9D/</loc>
+    <lastmod>2021-06-25T08:13:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/%E9%9B%86%E7%BE%A4/</loc>
+    <lastmod>2021-06-25T08:13:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/k8s/</loc>
+    <lastmod>2021-04-21T08:22:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/kubernetes/</loc>
+    <lastmod>2021-04-21T08:22:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%874/</loc>
+    <lastmod>2021-04-21T08:22:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/erlang/</loc>
+    <lastmod>2021-06-23T08:21:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/nginx/</loc>
+    <lastmod>2021-06-23T08:21:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/rabbittmq/</loc>
+    <lastmod>2021-06-23T08:21:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/tomcat/</loc>
+    <lastmod>2021-06-23T08:21:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%873/</loc>
+    <lastmod>2021-06-23T08:21:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%872/</loc>
+    <lastmod>2021-06-22T08:21:20+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/hugo/</loc>
+    <lastmod>2021-06-21T11:32:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/%E7%94%A8typora%E7%BC%96%E8%BE%91hugo%E5%B8%96%E5%AD%90%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/</loc>
+    <lastmod>2021-06-21T11:32:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/%E8%BD%AF%E4%BB%B6/</loc>
+    <lastmod>2021-06-21T11:32:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/categories/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2021-06-21T11:32:52+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/git/</loc>
+    <lastmod>2021-06-21T08:20:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/java/</loc>
+    <lastmod>2021-06-21T08:20:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/linux/</loc>
+    <lastmod>2021-06-21T08:20:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/node/</loc>
+    <lastmod>2021-06-21T08:20:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/python/</loc>
+    <lastmod>2021-06-21T08:20:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%871/</loc>
+    <lastmod>2021-06-21T08:20:21+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/%E8%AE%BE%E7%BD%AEyum%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%90%8E%E4%BF%9D%E7%95%99rpm%E5%8C%85/</loc>
+    <lastmod>2021-06-20T12:26:39+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>

@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Docker环境下的前后端分离项目部署(一) - 野生猿的笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Wang" /><meta name="description" content="" /><meta name="keywords" content="docker, 前后端分离, VM, MySQL, Redis, maven, node.js" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
+
+
+<link rel="canonical" href="https://wyc1282.github.io/post/docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.2e81bbed97b8b282c1aeb57488cc71c8d8c8ec559f3931531bd396bf31e0d4dd.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Docker环境下的前后端分离项目部署(一)" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wyc1282.github.io/post/docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-27T20:23:19&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-27T20:23:19&#43;08:00" />
+
+<meta itemprop="name" content="Docker环境下的前后端分离项目部署(一)">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2021-06-27T20:23:19&#43;08:00" />
+<meta itemprop="dateModified" content="2021-06-27T20:23:19&#43;08:00" />
+<meta itemprop="wordCount" content="3606">
+<meta itemprop="keywords" content="docker,VM,MySQL,Redis,maven,node.js," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Docker环境下的前后端分离项目部署(一)"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Wang</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">档案</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">类别</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Wang</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">档案</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">类别</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Docker环境下的前后端分离项目部署(一)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-27 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/"> 笔记 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#下载源码">下载源码</a></li>
+        <li><a href="#本机测试运行">本机测试运行</a>
+          <ul>
+            <li><a href="#用idea打开后端项目">用IDEA打开后端项目</a></li>
+            <li><a href="#创建数据库导入数据">创建数据库导入数据</a></li>
+            <li><a href="#修改srcmainresourcesapplication-devyml">修改src/main/resources/application-dev.yml</a></li>
+            <li><a href="#启动运行">启动运行</a></li>
+            <li><a href="#用webstorm打开后端项目">用webstorm打开后端项目</a></li>
+            <li><a href="#安装依赖">安装依赖</a></li>
+            <li><a href="#运行npm-run-dev">运行npm run dev</a></li>
+            <li><a href="#前后端本地测试完成">前后端本地测试完成</a></li>
+          </ul>
+        </li>
+        <li><a href="#docker环境配置">Docker环境配置</a>
+          <ul>
+            <li><a href="#安装docker">安装Docker</a></li>
+            <li><a href="#启动docker">启动docker</a></li>
+          </ul>
+        </li>
+        <li><a href="#mysql数据库集群">MySQL数据库集群</a>
+          <ul>
+            <li><a href="#使用pxc方案">使用PXC方案</a></li>
+            <li><a href="#下载镜像">下载镜像</a></li>
+            <li><a href="#镜像重命名">镜像重命名</a></li>
+            <li><a href="#删除源镜像">删除源镜像</a></li>
+            <li><a href="#查看镜像">查看镜像</a></li>
+            <li><a href="#创建内部网络">创建内部网络</a></li>
+            <li><a href="#创建数据卷">创建数据卷</a></li>
+            <li><a href="#创建pxc容器">创建PXC容器</a></li>
+          </ul>
+        </li>
+        <li><a href="#数据库负载均衡">数据库负载均衡</a>
+          <ul>
+            <li><a href="#方案1haproxy">方案1,Haproxy</a></li>
+            <li><a href="#方案2nginx">方案2,Nginx</a></li>
+          </ul>
+        </li>
+        <li><a href="#负载均衡的高可用方案">负载均衡的高可用方案</a>
+          <ul>
+            <li><a href="#1haproxy负载均衡加keepalived">1.Haproxy负载均衡加keepalived</a></li>
+            <li><a href="#keepalived的配置文件">keepalived的配置文件</a></li>
+            <li><a href="#启动keepalived">启动keepalived</a></li>
+            <li><a href="#测试连接">测试连接</a></li>
+            <li><a href="#2nginx负载均衡加keepalived">2.Nginx负载均衡加keepalived</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <hr>
+<h2 id="下载源码">下载源码</h2>
+<p>网址:https://gitee.com/Li-Ren/renren-fast  后端</p>
+<p>网址:https://gitee.com/renrenio/renren-fast-vue 前端</p>
+<p>下载完毕后解压</p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627203227910.png" alt="image-20210627203227910" style="zoom:150%;" /></p>
+<hr>
+<h2 id="本机测试运行">本机测试运行</h2>
+<h3 id="用idea打开后端项目">用IDEA打开后端项目</h3>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627203452254.png" alt="image-20210627203452254"></p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627203643306.png" alt="image-20210627203643306"></p>
+<p>安装lombok插件</p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627204458203.png" alt="image-20210627204458203"></p>
+<p>启用注释处理</p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627204524960.png" alt="image-20210627204524960"></p>
+<h3 id="创建数据库导入数据">创建数据库导入数据</h3>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627204831907.png" alt="image-20210627204831907"></p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627204750772.png" alt="image-20210627204750772" style="zoom:120%;" /></p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627204924624.png" alt="image-20210627204924624"></p>
+<h3 id="修改srcmainresourcesapplication-devyml">修改src/main/resources/application-dev.yml</h3>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627205151584.png" alt="image-20210627205151584"></p>
+<h3 id="启动运行">启动运行</h3>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627205324696.png" alt="image-20210627205324696"></p>
+<p>运行时可能会报错Caused by: javax.net.ssl.SSLHandshakeException: No appropriate protocol&hellip;&hellip;..这是因为jdk1.8版本导致SSL调用权限上有问题</p>
+<p>这个报错需要修改<code>C:\Program Files\Java\jdk1.8.0_291\jre\lib\security</code>下的<code>java.security</code>文件中的<code>jdk.tls.disabledAlgorithms=</code>项.删除<strong>SSLv3</strong></p>
+<hr>
+<h3 id="用webstorm打开后端项目">用webstorm打开后端项目</h3>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627205525847.png" alt="image-20210627205525847"></p>
+<h3 id="安装依赖">安装依赖</h3>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627205734589.png" alt="image-20210627205734589"></p>
+<p>这里可能会有报错,项目中使用的sass版本为4.9.0 支持的nodejs版本为10.x或者以下重装一下低版本的nodejs基本就能解决</p>
+<p>然后使用npm语句 安装node-sass</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">npm i node-sass --sass_binary_site<span class="o">=</span>https://npm.taobao.org/mirrors/node-sass/
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="运行npm-run-dev">运行npm run dev</h3>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210627222143533.png" alt="image-20210627222143533"></p>
+<h3 id="前后端本地测试完成">前后端本地测试完成</h3>
+<h2 id="docker环境配置">Docker环境配置</h2>
+<p>更新YUM软件管理器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum -y update</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="安装docker">安装Docker</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost ~]# yum -y install docker
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="启动docker">启动docker</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start docker</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl status docker</span>
+● docker.service - Docker Application Container Engine
+   Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/docker.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+   Active: active <span class="o">(</span>running<span class="o">)</span> since 日 2021-06-27 23:08:28 CST<span class="p">;</span> 3s ago
+     Docs: http://docs.docker.com
+ Main PID: <span class="m">53359</span> <span class="o">(</span>dockerd-current<span class="o">)</span>
+   CGroup: /system.slice/docker.service
+           ├─53359 /usr/bin/dockerd-current --add-runtime docker-runc<span class="o">=</span>/usr/libexec/docker/docker-runc...
+           └─53367 /usr/bin/docker-containerd-current -l unix:///var/run/docker/libcontainerd/docker-...
+
+6月 <span class="m">27</span> 23:08:26 localhost.localdomain dockerd-current<span class="o">[</span>53359<span class="o">]</span>: <span class="nv">time</span><span class="o">=</span><span class="s2">&#34;2021-06-27T23:08:26.724196485+...7&#34;</span>
+6月 <span class="m">27</span> 23:08:27 localhost.localdomain dockerd-current<span class="o">[</span>53359<span class="o">]</span>: <span class="nv">time</span><span class="o">=</span><span class="s2">&#34;2021-06-27T23:08:27.795893840+...s&#34;</span>
+6月 <span class="m">27</span> 23:08:27 localhost.localdomain dockerd-current<span class="o">[</span>53359<span class="o">]</span>: <span class="nv">time</span><span class="o">=</span><span class="s2">&#34;2021-06-27T23:08:27.796872476+....&#34;</span>
+6月 <span class="m">27</span> 23:08:27 localhost.localdomain dockerd-current<span class="o">[</span>53359<span class="o">]</span>: <span class="nv">time</span><span class="o">=</span><span class="s2">&#34;2021-06-27T23:08:27.815459054+...e&#34;</span>
+6月 <span class="m">27</span> 23:08:27 localhost.localdomain dockerd-current<span class="o">[</span>53359<span class="o">]</span>: <span class="nv">time</span><span class="o">=</span><span class="s2">&#34;2021-06-27T23:08:27.939404599+...s&#34;</span>
+6月 <span class="m">27</span> 23:08:28 localhost.localdomain dockerd-current<span class="o">[</span>53359<span class="o">]</span>: <span class="nv">time</span><span class="o">=</span><span class="s2">&#34;2021-06-27T23:08:28.048781590+....&#34;</span>
+6月 <span class="m">27</span> 23:08:28 localhost.localdomain dockerd-current<span class="o">[</span>53359<span class="o">]</span>: <span class="nv">time</span><span class="o">=</span><span class="s2">&#34;2021-06-27T23:08:28.066017467+...n&#34;</span>
+6月 <span class="m">27</span> 23:08:28 localhost.localdomain dockerd-current<span class="o">[</span>53359<span class="o">]</span>: <span class="nv">time</span><span class="o">=</span><span class="s2">&#34;2021-06-27T23:08:28.066051017+....1
+</span><span class="s2">6月 27 23:08:28 localhost.localdomain dockerd-current[53359]: time=&#34;</span>2021-06-27T23:08:28.070563926+...k<span class="s2">&#34;
+</span><span class="s2">6月 27 23:08:28 localhost.localdomain systemd[1]: Started Docker Application Container Engine.
+</span><span class="s2">Hint: Some lines were ellipsized, use -l to show in full.
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="mysql数据库集群">MySQL数据库集群</h2>
+<h3 id="使用pxc方案">使用PXC方案</h3>
+<h3 id="下载镜像">下载镜像</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost home<span class="o">]</span><span class="c1"># docker pull percona/percona-xtradb-cluster</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="镜像重命名">镜像重命名</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost home]# docker tag docker.io/percona/percona-xtradb-cluster pxc
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="删除源镜像">删除源镜像</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost home]#docker rmi docker.io/percona/percona-xtradb-cluster
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="查看镜像">查看镜像</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost home]# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+pxc                 latest              11cb5b10b7ff        2 weeks ago         569 MB
+java                latest              d23bdf5b1b1b        4 years ago         643 MB
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="创建内部网络">创建内部网络</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker network create --subnet=172.18.0.0/24 net1</span>
+368ac106e7f9e0b2a9165c725d2f23b4215129d71b0467465d3a418d0477a528
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker inspect net1</span>
+<span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">&#34;Name&#34;</span>: <span class="s2">&#34;net1&#34;</span>,
+        <span class="s2">&#34;Id&#34;</span>: <span class="s2">&#34;368ac106e7f9e0b2a9165c725d2f23b4215129d71b0467465d3a418d0477a528&#34;</span>,
+        <span class="s2">&#34;Created&#34;</span>: <span class="s2">&#34;2021-06-28T22:01:49.943180211+08:00&#34;</span>,
+        <span class="s2">&#34;Scope&#34;</span>: <span class="s2">&#34;local&#34;</span>,
+        <span class="s2">&#34;Driver&#34;</span>: <span class="s2">&#34;bridge&#34;</span>,
+        <span class="s2">&#34;EnableIPv6&#34;</span>: false,
+        <span class="s2">&#34;IPAM&#34;</span>: <span class="o">{</span>
+            <span class="s2">&#34;Driver&#34;</span>: <span class="s2">&#34;default&#34;</span>,
+            <span class="s2">&#34;Options&#34;</span>: <span class="o">{}</span>,
+            <span class="s2">&#34;Config&#34;</span>: <span class="o">[</span>
+                <span class="o">{</span>
+                    <span class="s2">&#34;Subnet&#34;</span>: <span class="s2">&#34;172.18.0.0/24&#34;</span>
+                <span class="o">}</span>
+            <span class="o">]</span>
+        <span class="o">}</span>,
+        <span class="s2">&#34;Internal&#34;</span>: false,
+        <span class="s2">&#34;Attachable&#34;</span>: false,
+        <span class="s2">&#34;Containers&#34;</span>: <span class="o">{}</span>,
+        <span class="s2">&#34;Options&#34;</span>: <span class="o">{}</span>,
+        <span class="s2">&#34;Labels&#34;</span>: <span class="o">{}</span>
+    <span class="o">}</span>
+<span class="o">]</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="创建数据卷">创建数据卷</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker volume create v1</span>
+v1
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker volume create v2</span>
+v2
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker volume create v3</span>
+v3
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker volume create v4</span>
+v4
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker volume create v5</span>
+v5
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker inspect v1</span>
+<span class="o">[</span>
+    <span class="o">{</span>
+        <span class="s2">&#34;Driver&#34;</span>: <span class="s2">&#34;local&#34;</span>,
+        <span class="s2">&#34;Labels&#34;</span>: <span class="o">{}</span>,
+        <span class="s2">&#34;Mountpoint&#34;</span>: <span class="s2">&#34;/var/lib/docker/volumes/v1/_data&#34;</span>,
+        <span class="s2">&#34;Name&#34;</span>: <span class="s2">&#34;v1&#34;</span>,
+        <span class="s2">&#34;Options&#34;</span>: <span class="o">{}</span>,
+        <span class="s2">&#34;Scope&#34;</span>: <span class="s2">&#34;local&#34;</span>
+    <span class="o">}</span>
+<span class="o">]</span>
+<span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="创建pxc容器">创建PXC容器</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost ~]# docker run -d -p 3307:3306	#端口映射
+-v v2:/var/lib/mysql	#具名挂载,v1容器卷的/var/lib/mysql
+-e MYSQL_ROOT_PASSWORD=111111	#MySQL数据库登录密码
+-e CLUSTER_NAME=PXC	#集群名称
+-e XTRABACKUP_PASSWORD=111111	#集群同步密码
+-e CLUSTER_JOIN=node1 	#加入node1的集群
+--privileged	#权限
+--name=node1	#名称
+--net=net1 --ip 172.18.0.2	#内部网络,IP地址
+pxc		#镜像名称
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost ~]# docker run -d -p 3306:3306 -v v1:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=111111 -e CLUSTER_NAME=PXC -e pxc-encrypt-cluster-traffic=OFF -e XTRABACKUP_PASSWORD=111111 --privileged  --name=node1 --net=net1 --ip 172.18.0.2 pxc
+#第一个PXC容器创建后一定要等到MySQL初始化完成后再去创建第二个PXC容器,用数据库管理软件连接一下数据就能知识是否初始化完成.
+[root@localhost ~]# docker run -d -p 3307:3306 -v v2:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=asdasd45 -e CLUSTER_NAME=PXC -e CLUSTER_JOIN=node1 -e XTRABACKUP_PASSWORD=asdasd45 --privileged  --name=node2 --net=net1 --ip 172.18.0.3 pxc
+
+[root@localhost ~]# docker run -d -p 3308:3306 -v v3:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=111111 -e CLUSTER_NAME=PXC -e CLUSTER_JOIN=node1 -e XTRABACKUP_PASSWORD=111111 --privileged  --name=node3 --net=net1 --ip 172.18.0.4 pxc
+
+[root@localhost ~]# docker run -d -p 3309:3306 -v v4:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=111111 -e CLUSTER_NAME=PXC -e CLUSTER_JOIN=node1 -e XTRABACKUP_PASSWORD=111111 --privileged  --name=node4 --net=net1 --ip 172.18.0.5 pxc
+
+[root@localhost ~]# docker run -d -p 3310:3306 -v v5:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=111111 -e CLUSTER_NAME=PXC -e CLUSTER_JOIN=node1 -e XTRABACKUP_PASSWORD=111111 --privileged  --name=node5 --net=net1 --ip 172.18.0.6 pxc
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>发生第一个节点启动后,后面的节点都不能正常启动的情况的解决办法</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#先看下日志</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker logs node2</span>
+<span class="c1">#查看报错信息</span>
+2021-06-28T16:42:42.896587Z <span class="m">0</span> <span class="o">[</span>ERROR<span class="o">]</span> <span class="o">[</span>MY-000000<span class="o">]</span> <span class="o">[</span>Galera<span class="o">]</span> handshake with remote endpoint ssl://172.18.0.2:4567 failed: asio.ssl:67567754: <span class="s1">&#39;invalid padding&#39;</span> <span class="o">(</span> 67567754: <span class="s1">&#39;error:0407008A:rsa routines:RSA_padding_check_PKCS1_type_1:invalid padding&#39;</span><span class="o">)</span>
+This error is often caused by SSL issues. For more information, please see:
+  https://per.co.na/pxc/encrypt_cluster_traffic
+<span class="c1">#查看https://per.co.na/pxc/encrypt_cluster_traffic网址</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>非加密链接 默认的pxc-encrypt-cluster-traffic字段的值是ON,也就是默认开启了ssl加密链接。 如果不需要加密链接就将<em>pxc-encrypt-cluster-traffic=OFF</em></p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210629011604776.png" alt="image-20210629011604776"></p>
+<p>手动把节点1的这5个文件拷贝到其他节点的数据卷相同的位置后,重新start节点</p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210629011917543.png" alt="image-20210629011917543"></p>
+<p>启动成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker ps</span>
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                              NAMES
+c2abf20fda1b        pxc                 <span class="s2">&#34;/entrypoint.sh my...&#34;</span>   <span class="m">3</span> minutes ago       Up <span class="m">48</span> seconds       4567-4568/tcp, 33060/tcp, 0.0.0.0:3310-&gt;3306/tcp   node5
+be9012cb81b2        pxc                 <span class="s2">&#34;/entrypoint.sh my...&#34;</span>   <span class="m">3</span> minutes ago       Up <span class="m">48</span> seconds       4567-4568/tcp, 33060/tcp, 0.0.0.0:3309-&gt;3306/tcp   node4
+87f402d5b60b        pxc                 <span class="s2">&#34;/entrypoint.sh my...&#34;</span>   <span class="m">3</span> minutes ago       Up <span class="m">49</span> seconds       4567-4568/tcp, 33060/tcp, 0.0.0.0:3308-&gt;3306/tcp   node3
+7405879648d7        pxc                 <span class="s2">&#34;/entrypoint.sh my...&#34;</span>   <span class="m">4</span> minutes ago       Up <span class="m">49</span> seconds       4567-4568/tcp, 33060/tcp, 0.0.0.0:3307-&gt;3306/tcp   node2
+d350c9b05d96        pxc                 <span class="s2">&#34;/entrypoint.sh my...&#34;</span>   <span class="m">6</span> minutes ago       Up <span class="m">6</span> minutes        4567-4568/tcp, 0.0.0.0:3306-&gt;3306/tcp, 33060/tcp   node1
+</code></pre></td></tr></table>
+</div>
+</div><p>5个数据库都连接成功</p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210629095055191.png" alt="image-20210629095055191"></p>
+<p>随机的顺序在5个数据库分别向同一张表内插入一条数据,测试同步</p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210629100150906.png" alt="image-20210629100150906"></p>
+<h2 id="数据库负载均衡">数据库负载均衡</h2>
+<h3 id="方案1haproxy">方案1,Haproxy</h3>
+<p>下载镜像 改名 导出保存</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker pull haproxy</span>
+Using default tag: latest
+Trying to pull repository docker.io/library/haproxy ... 
+latest: Pulling from docker.io/library/haproxy
+b4d181a07f80: Pull <span class="nb">complete</span> 
+91332cb81883: Pull <span class="nb">complete</span> 
+fecb9375965e: Pull <span class="nb">complete</span> 
+30bd497f3ff3: Pull <span class="nb">complete</span> 
+Digest: sha256:e3074658a6a9d0d0a873f674d0abd0fd7343491db5537007cadf522f996c53b2
+Status: Downloaded newer image <span class="k">for</span> docker.io/haproxy:latest
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker tag docker.io/haproxy haproxy</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker images</span>
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+docker.io/haproxy   latest              0d8843c089fb        <span class="m">2</span> days ago          95.4 MB
+haproxy             latest              0d8843c089fb        <span class="m">2</span> days ago          95.4 MB
+pxc                 latest              11cb5b10b7ff        <span class="m">2</span> weeks ago         <span class="m">569</span> MB
+java                latest              d23bdf5b1b1b        <span class="m">4</span> years ago         <span class="m">643</span> MB
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker rmi docker.io/haproxy</span>
+Untagged: docker.io/haproxy:latest
+Untagged: docker.io/haproxy@sha256:e3074658a6a9d0d0a873f674d0abd0fd7343491db5537007cadf522f996c53b2
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker images</span>
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+haproxy             latest              0d8843c089fb        <span class="m">2</span> days ago          95.4 MB
+pxc                 latest              11cb5b10b7ff        <span class="m">2</span> weeks ago         <span class="m">569</span> MB
+java                latest              d23bdf5b1b1b        <span class="m">4</span> years ago         <span class="m">643</span> MB
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker save haproxy &gt; /root/haproxy.tar.gz</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll</span>
+总用量 <span class="m">1305828</span>
+-rw-------. <span class="m">1</span> root root      <span class="m">1268</span> 6月  <span class="m">27</span> 10:33 anaconda-ks.cfg
+-rw-r--r--  <span class="m">1</span> root root  <span class="m">98746368</span> 6月  <span class="m">29</span> 10:12 haproxy.tar.gz
+-rw-r--r--. <span class="m">1</span> root root <span class="m">659249664</span> 6月  <span class="m">27</span> 23:18 java.tar.gz
+-rw-r--r--  <span class="m">1</span> root root <span class="m">579165696</span> 6月  <span class="m">28</span> 13:12 pxc.tar.gz
+</code></pre></td></tr></table>
+</div>
+</div><p>创建并编写Haproxy的配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost ~]# touch haproxy.cfg
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#全局</span>
+global
+    log             127.0.0.1   local5 info
+    chroot          /usr/local/etc/haproxy               <span class="c1">#安装目录</span>
+    user        	root 
+    group       	root 
+    daemon                                               <span class="c1">#守护进程运行</span>
+
+    <span class="c1"># maxconn         4096                                 #最大连接数</span>
+    <span class="c1"># uid             99                                   #用户nobody</span>
+    <span class="c1"># gid             99                                   #组nobody</span>
+    <span class="c1"># nbproc          1                                    #进程数量</span>
+    <span class="c1"># pidfile         /usr/local/haproxy/logs/haproxy.pid  #haproxy pid</span>
+
+defaults
+    log          global
+    mode         http                                    <span class="c1">#7层http 4层tcp  如果要让haproxy支持虚拟主机，mode 必须设为http </span>
+    option       httplog                                 <span class="c1">#http 日志格式</span>
+    option       httpclose                               <span class="c1">#主动关闭http通道</span>
+    option       redispatch                              <span class="c1">#serverId对应的服务器挂掉后,强制定向到其他健康的服务器</span>
+    option       dontlognull                             <span class="c1">#日志中不记录负载均衡的心跳检测记录</span>
+    maxconn      <span class="m">2000</span>                                    <span class="c1">#最大连接数</span>
+    timeout      connect      <span class="m">3600000</span>                    <span class="c1">#连接超时(毫秒)</span>
+    timeout      client      <span class="m">3600000</span>                     <span class="c1">#客户端超时(毫秒)</span>
+    timeout      server      <span class="m">3600000</span>                     <span class="c1">#服务器超时(毫秒)</span>
+    <span class="c1"># retries      </span>
+
+<span class="c1">#监控界面</span>
+listen  admin_status
+    <span class="nb">bind</span> 0.0.0.0:8888                     <span class="c1">#监控界面的访问IP和端口</span>
+    mode http                             <span class="c1">#访问协议</span>
+    stats uri /dbs                        <span class="c1">#URI相对地址</span>
+    stats realm Global<span class="se">\ </span>statistice        <span class="c1">#统计报告格式</span>
+    stats auth admin:admin            <span class="c1">#登录账户信息</span>
+
+<span class="c1">#数据库负载均衡</span>
+listen proxy-mysql
+    <span class="nb">bind</span> 0.0.0.0:3306                     <span class="c1">#数据库访问IP和端口</span>
+    mode tcp                              <span class="c1">#访问协议</span>
+    balance roundrobin                    <span class="c1">#负载均衡算法.轮询算法roundrobin;权重算法static-rr;最少连接算法leastconn;请求源思算法source</span>
+    option tcplog                         <span class="c1">#日志格式</span>
+<span class="c1">#心跳检测设置</span>
+<span class="c1">#在Mysq中创建一个没有权限的haproxy用户,密码为空.haproxy使用这个账户对MySQL进行心跳检测</span>
+    option mysql-check user haproxy
+    server Mysql_1 172.18.0.2:3306 check weight <span class="m">1</span> maxconn <span class="m">2000</span>
+    server Mysql_2 172.18.0.3:3306 check weight <span class="m">1</span> maxconn <span class="m">2000</span>
+    server Mysql_3 172.18.0.4:3306 check weight <span class="m">1</span> maxconn <span class="m">2000</span>
+    server Mysql_4 172.18.0.5:3306 check weight <span class="m">1</span> maxconn <span class="m">2000</span>
+    server Mysql_5 172.18.0.6:3306 check weight <span class="m">1</span> maxconn <span class="m">2000</span>
+<span class="c1">#使用keepalive检测死链</span>
+    option tcpka
+</code></pre></td></tr></table>
+</div>
+</div><p>创建容器导入配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker run 
+-it  	<span class="c1">#带交互界面</span>
+-d		<span class="c1">#后台运行</span>
+-p 4001:8888 -p 4002:3306 <span class="c1">#端口映射 本机:容器</span>
+-v /usr/local/etc/haproxy:/usr/local/etc/haproxy <span class="c1">#匿名挂载 本机路径:容器路径</span>
+--name h1  <span class="c1">#容器命名</span>
+--privileged  <span class="c1">#给与权限</span>
+--net<span class="o">=</span>net1   <span class="c1">#内部网络</span>
+haproxy  <span class="c1">#镜像名称</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker run -it -d -p 4001:8888 -p 4002:3306 -v /usr/local/etc/haproxy:/usr/local/etc/haproxy --name h1 --privileged --net=net1 haproxy</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>进入容器生效配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker exec -it h1 bash</span>
+haproxy@44119be192d0:/$ haproxy -f /usr/local/etc/haproxy/haproxy.cfg 
+haproxy@44119be192d0:/$ <span class="nb">exit</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker restart h1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>浏览器打开监控页面http://192.168.8.205:4001/dbs   账号密码admin</p>
+<p>5个节点都运行正常</p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210629124846346.png" alt="image-20210629124846346"></p>
+<p>停掉一个节点实验一下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker stop node1</span>
+node1
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210629125037507.png" alt="image-20210629125037507"></p>
+<p>测试挂掉的节点再想启动起来会出现报错</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">2021-06-29T04:55:57.050486Z <span class="m">0</span> <span class="o">[</span>ERROR<span class="o">]</span> <span class="o">[</span>MY-000000<span class="o">]</span> <span class="o">[</span>Galera<span class="o">]</span> It may not be safe to bootstrap the cluster from this node. It was not the last one to leave the cluster and may not contain all the updates. To force cluster bootstrap with this node, edit the grastate.dat file manually and <span class="nb">set</span> safe_to_bootstrap to <span class="m">1</span> .
+2021-06-29T04:55:57.050502Z <span class="m">0</span> <span class="o">[</span>ERROR<span class="o">]</span> <span class="o">[</span>MY-000000<span class="o">]</span> <span class="o">[</span>WSREP<span class="o">]</span> Provider/Node <span class="o">(</span>gcomm://<span class="o">)</span> failed to establish connection with cluster <span class="o">(</span>reason: 7<span class="o">)</span>
+2021-06-29T04:55:57.050520Z <span class="m">0</span> <span class="o">[</span>ERROR<span class="o">]</span> <span class="o">[</span>MY-010119<span class="o">]</span> <span class="o">[</span>Server<span class="o">]</span> Aborting
+
+</code></pre></td></tr></table>
+</div>
+</div><p>根据提示将grastate.dat 文件的 safe_to_bootstrap 0设置为1就可以正常启动了</p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210629130118039.png" alt="image-20210629130118039"></p>
+<h3 id="方案2nginx">方案2,Nginx</h3>
+<p>下载镜像</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker pull nginx</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>创建容器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost ~]# docker run -it -d -p 4406:8080 -v /usr/local/etc/nginx:/usr/local/etc/nginx --name n1 --privileged --network=net1 --ip 172.18.0.10 nginx bash
+</code></pre></td></tr></table>
+</div>
+</div><p>编写配置文件.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">user</span>  <span class="s">nginx</span><span class="p">;</span>
+<span class="k">worker_processes</span>  <span class="s">auto</span><span class="p">;</span>
+
+<span class="k">events</span> <span class="p">{</span>
+    <span class="kn">worker_connections</span>  <span class="mi">1024</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">stream{</span>
+	<span class="s">upstream</span> <span class="s">mysql</span><span class="p">{</span>
+	    <span class="kn">server</span> <span class="n">172.18.0.2</span><span class="p">:</span><span class="mi">3306</span><span class="p">;</span>
+	    <span class="kn">server</span> <span class="n">172.18.0.3</span><span class="p">:</span><span class="mi">3306</span><span class="p">;</span>
+	    <span class="kn">server</span> <span class="n">172.18.0.4</span><span class="p">:</span><span class="mi">3306</span><span class="p">;</span>
+	    <span class="kn">server</span> <span class="n">172.18.0.5</span><span class="p">:</span><span class="mi">3306</span><span class="p">;</span>
+	    <span class="kn">server</span> <span class="n">172.18.0.6</span><span class="p">:</span><span class="mi">3306</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">server</span> <span class="p">{</span>
+        <span class="kn">listen</span> <span class="mi">8080</span><span class="p">;</span>
+        <span class="kn">proxy_pass</span> <span class="s">mysql</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">}</span>
+
+<span class="s">http</span> <span class="p">{</span>
+    <span class="kn">include</span>       <span class="s">mime.types</span><span class="p">;</span>
+    <span class="kn">default_type</span>  <span class="s">application/octet-stream</span><span class="p">;</span>
+    <span class="kn">sendfile</span>        <span class="no">on</span><span class="p">;</span>
+    <span class="kn">keepalive_timeout</span>  <span class="mi">65</span><span class="p">;</span>
+    <span class="kn">server</span> <span class="p">{</span>
+        <span class="kn">listen</span>       <span class="mi">80</span><span class="p">;</span>
+        <span class="kn">server_name</span>  <span class="s">localhost</span><span class="p">;</span>
+        <span class="c1">#charset koi8-r;
+</span><span class="c1"></span>        <span class="c1">#access_log  logs/host.access.log  main;
+</span><span class="c1"></span>        <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+            <span class="kn">root</span>   <span class="s">localhost</span><span class="p">;</span> <span class="c1">#填入项目路径
+</span><span class="c1"></span>            <span class="kn">index</span>  <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
+            <span class="c1">#try_files $uri $uri/ /index.html; #解决刷新404的问题.
+</span><span class="c1"></span>        <span class="p">}</span>
+
+	  <span class="kn">error_page</span>  <span class="mi">500</span> <span class="mi">502</span> <span class="mi">503</span> <span class="mi">504</span>  <span class="s">/50x.html</span><span class="p">;</span>
+  
+</code></pre></td></tr></table>
+</div>
+</div><p>配置完毕,测试连接一下</p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210630005629006.png" alt="image-20210630005629006"></p>
+<p>插入条数据看看</p>
+<p><img src="/images/Docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/image-20210630010440716.png" alt="image-20210630010440716"></p>
+<p>完事</p>
+<h2 id="负载均衡的高可用方案">负载均衡的高可用方案</h2>
+<h3 id="1haproxy负载均衡加keepalived">1.Haproxy负载均衡加keepalived</h3>
+<p>先启动Haproxy容器,安装keepalived程序</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker start h1 </span>
+h1
+<span class="c1">#交互界面进入容器,-u 0 表示root用户</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker exec -u 0 -it h1 bash</span>
+
+<span class="c1">#想apt更新一下</span>
+root@44119be192d0:/# apt-get update
+
+Get:1 http://security.debian.org/debian-security buster/updates InRelease <span class="o">[</span>65.4 kB<span class="o">]</span>
+Get:2 http://deb.debian.org/debian buster InRelease <span class="o">[</span><span class="m">122</span> kB<span class="o">]</span>
+Get:3 http://deb.debian.org/debian buster-updates InRelease <span class="o">[</span>51.9 kB<span class="o">]</span>
+Get:4 http://security.debian.org/debian-security buster/updates/main amd64 Packages <span class="o">[</span><span class="m">293</span> kB<span class="o">]</span>
+Get:5 http://deb.debian.org/debian buster/main amd64 Packages <span class="o">[</span><span class="m">7907</span> kB<span class="o">]</span>
+Get:6 http://deb.debian.org/debian buster-updates/main amd64 Packages <span class="o">[</span>15.2 kB<span class="o">]</span>
+Fetched <span class="m">8453</span> kB in 4s <span class="o">(</span><span class="m">2260</span> kB/s<span class="o">)</span>                         
+Reading package lists... Done
+<span class="c1">#安装keepalived</span>
+root@44119be192d0:/# apt-get install -y keepalived
+
+<span class="c1">#验证安装</span>
+root@44119be192d0:/# keepalived -v
+
+Keepalived v2.0.10 <span class="o">(</span>11/12,2018<span class="o">)</span>
+Copyright<span class="o">(</span>C<span class="o">)</span> 2001-2018 Alexandre Cassen, &lt;acassen@gmail.com&gt;
+Built with kernel headers <span class="k">for</span> Linux 4.18.20
+Running on Linux 3.10.0-1160.31.1.el7.x86_64 <span class="c1">#1 SMP Thu Jun 10 13:32:12 UTC 2021</span>
+
+<span class="c1">#安装vim用来编辑配置文件</span>
+root@44119be192d0:/etc# apt-get install -y vim
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="keepalived的配置文件">keepalived的配置文件</h3>
+<p>路径/etc/keepalived/keepalived.conf</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">vrrp_instance V1 {
+  state MASTER          #MASTER 和 SLAVE
+  interface eth0        #指定网卡
+  virtual_router_id 51  #虚拟路由标识0-255之间
+  priority 100          #权重
+  advert_int 1          #心跳检测间隔时间
+  authentication {
+    auth_type PASS      #账号
+    auth_pass 123456    #密码
+  }
+  virtual_ipaddress{    #定义虚拟IP
+    172.18.0.201
+  }
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="启动keepalived">启动keepalived</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@44119be192d0:/etc/keepalived# service keepalived start
+<span class="o">[</span> ok <span class="o">]</span> Starting keepalived: keepalived.
+root@44119be192d0:/etc/keepalived# <span class="nb">exit</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="测试连接">测试连接</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ping 172.18.0.201</span>
+PING 172.18.0.201 <span class="o">(</span>172.18.0.201<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from 172.18.0.201: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.058 ms
+<span class="m">64</span> bytes from 172.18.0.201: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.029 ms
+<span class="m">64</span> bytes from 172.18.0.201: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">3</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.033 ms
+<span class="m">64</span> bytes from 172.18.0.201: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">4</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.042 ms
+^C
+--- 172.18.0.201 ping statistics ---
+<span class="m">4</span> packets transmitted, <span class="m">4</span> received, 0% packet loss, <span class="nb">time</span> 3000ms
+rtt min/avg/max/mdev <span class="o">=</span> 0.029/0.040/0.058/0.012 ms
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2nginx负载均衡加keepalived">2.Nginx负载均衡加keepalived</h3>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/docker/">docker</a>
+          <a href="/tags/vm/">VM</a>
+          <a href="/tags/mysql/">MySQL</a>
+          <a href="/tags/redis/">Redis</a>
+          <a href="/tags/maven/">maven</a>
+          <a href="/tags/node.js/">node.js</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/windows2008r2%E9%85%8D%E7%BD%AEiis%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Windows2008R2配置IIS环境搭建网站</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E5%BC%80%E6%BA%90%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AEruoyi%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A4%9A%E5%AE%9E%E4%BE%8B%E9%83%A8%E7%BD%B2/">
+            <span class="next-text nav-default">开源前后端分离项目RuoYi的虚拟机多实例部署</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'xejwJ1mqtIJ6JAnKlCXzHODQ-gzGzoHsz',
+        appKey: 'WGB8ABQxGRsIT5gndRGMIMxg',
+        notify:  false ,
+        verify:  false ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://wyc1282.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Wang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

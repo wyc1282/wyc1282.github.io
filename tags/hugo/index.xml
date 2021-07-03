@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HUGO on 野生猿的笔记</title>
+    <link>https://wyc1282.github.io/tags/hugo/</link>
+    <description>Recent content in HUGO on 野生猿的笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 21 Jun 2021 11:32:52 +0800</lastBuildDate><atom:link href="https://wyc1282.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用Typora软件在本地编辑HUGO帖子插入图片</title>
+      <link>https://wyc1282.github.io/post/%E7%94%A8typora%E7%BC%96%E8%BE%91hugo%E5%B8%96%E5%AD%90%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/</link>
+      <pubDate>Mon, 21 Jun 2021 11:32:52 +0800</pubDate>
+      
+      <guid>https://wyc1282.github.io/post/%E7%94%A8typora%E7%BC%96%E8%BE%91hugo%E5%B8%96%E5%AD%90%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

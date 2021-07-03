@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Node on 野生猿的笔记</title>
+    <link>https://wyc1282.github.io/tags/node/</link>
+    <description>Recent content in Node on 野生猿的笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 21 Jun 2021 08:20:21 +0800</lastBuildDate><atom:link href="https://wyc1282.github.io/tags/node/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>日常娱乐环境准备(一)</title>
+      <link>https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%871/</link>
+      <pubDate>Mon, 21 Jun 2021 08:20:21 +0800</pubDate>
+      
+      <guid>https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%871/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

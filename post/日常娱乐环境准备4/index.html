@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>日常娱乐环境准备(四) - 野生猿的笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Wang" /><meta name="description" content="Docker,Kubernetes安装" /><meta name="keywords" content="Docker, Kubernetes, k8s" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
+
+
+<link rel="canonical" href="https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%874/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.2e81bbed97b8b282c1aeb57488cc71c8d8c8ec559f3931531bd396bf31e0d4dd.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="日常娱乐环境准备(四)" />
+<meta property="og:description" content="Docker,Kubernetes安装" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%874/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-24T08:21:22&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-21T08:22:21&#43;08:00" />
+
+<meta itemprop="name" content="日常娱乐环境准备(四)">
+<meta itemprop="description" content="Docker,Kubernetes安装"><meta itemprop="datePublished" content="2021-06-24T08:21:22&#43;08:00" />
+<meta itemprop="dateModified" content="2021-04-21T08:22:21&#43;08:00" />
+<meta itemprop="wordCount" content="713">
+<meta itemprop="keywords" content="Docker,Kubernetes,k8s," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="日常娱乐环境准备(四)"/>
+<meta name="twitter:description" content="Docker,Kubernetes安装"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Wang</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">档案</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">类别</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Wang</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">档案</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">类别</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">日常娱乐环境准备(四)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-24 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/"> 笔记 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#docker安装部署">Docker安装部署</a>
+          <ul>
+            <li><a href="#检查安装结果">检查安装结果</a></li>
+            <li><a href="#设置开机启动">设置开机启动</a></li>
+            <li><a href="#编辑配置文件加入国内源">编辑配置文件加入国内源</a></li>
+          </ul>
+        </li>
+        <li><a href="#kubernetesk8s安装部署">KUBERNETES(k8s)安装部署</a>
+          <ul>
+            <li><a href="#先关闭自带防火墙">先关闭自带防火墙</a></li>
+            <li><a href="#安装etcd和kubernetes软件">安装etcd和kubernetes软件</a></li>
+            <li><a href="#按顺序启动服务">按顺序启动服务</a></li>
+            <li><a href="#如果启动kube-apiserverservice-时报错">如果启动kube-apiserver.service 时报错</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <hr>
+<h2 id="docker安装部署">Docker安装部署</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># yum安装</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install -y docker</span>
+已安装:
+  docker.x86_64 2:1.13.1-208.git7d71120.el7_9                               
+完毕！
+<span class="c1">#启动服务</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start docker</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl status docker</span>
+● docker.service - Docker Application Container Engine
+   Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/docker.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+   Active: active <span class="o">(</span>running<span class="o">)</span> since 四 2021-06-24 04:36:21 CST<span class="p">;</span> 8s ago
+     Docs: http://docs.docker.com
+ Main PID: <span class="m">22456</span> <span class="o">(</span>dockerd-current<span class="o">)</span>
+   CGroup: /system.slice/docker.service
+           ├─22456 /usr/bin/dockerd-current --add-runtime docker-runc<span class="o">=</span>/usr/libexec/docker/dock...
+           └─22462 /usr/bin/docker-containerd-current -l unix:///var/run/docker/libcontainerd/...
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="检查安装结果">检查安装结果</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># docker version</span>
+Client:
+ Version:         1.13.1
+ API version:     1.26
+ Package version: docker-1.13.1-208.git7d71120.el7_9.x86_64
+ Go version:      go1.10.3
+ Git commit:      7d71120/1.13.1
+ Built:           Mon Jun  <span class="m">7</span> 15:36:09 <span class="m">2021</span>
+ OS/Arch:         linux/amd64
+
+Server:
+ Version:         1.13.1
+ API version:     1.26 <span class="o">(</span>minimum version 1.12<span class="o">)</span>
+ Package version: docker-1.13.1-208.git7d71120.el7_9.x86_64
+ Go version:      go1.10.3
+ Git commit:      7d71120/1.13.1
+ Built:           Mon Jun  <span class="m">7</span> 15:36:09 <span class="m">2021</span>
+ OS/Arch:         linux/amd64
+ Experimental:    <span class="nb">false</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="设置开机启动">设置开机启动</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl enable  docker</span>
+Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="编辑配置文件加入国内源">编辑配置文件加入国内源</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost ~]# vim /etc/docker/daemon.json 
+#加入下面内如
+{
+ &#34;registry-mirrors&#34;: [&#34;http://hub-mirror.c.163.com&#34;]
+}
+#重新加载
+[root@localhost ~]# systemctl daemon-reload 
+[root@localhost ~]# systemctl reload docker.service 
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="kubernetesk8s安装部署">KUBERNETES(k8s)安装部署</h2>
+<h3 id="先关闭自带防火墙">先关闭自带防火墙</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl status firewalld.service </span>
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/firewalld.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+   Active: inactive <span class="o">(</span>dead<span class="o">)</span>
+     Docs: man:firewalld<span class="o">(</span>1<span class="o">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="安装etcd和kubernetes软件">安装etcd和kubernetes软件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install -y etcd.x86_64 kubernetes  </span>
+已安装:
+  etcd.x86_64 0:3.3.11-2.el7.centos         kubernetes.x86_64 0:1.5.2-0.7.git269f928.el7        
+
+作为依赖被安装:
+  conntrack-tools.x86_64 0:1.4.4-7.el7                                                          
+  kubernetes-client.x86_64 0:1.5.2-0.7.git269f928.el7                                           
+  kubernetes-master.x86_64 0:1.5.2-0.7.git269f928.el7                                           
+  kubernetes-node.x86_64 0:1.5.2-0.7.git269f928.el7                                             
+  libnetfilter_cthelper.x86_64 0:1.0.0-11.el7                                                   
+  libnetfilter_cttimeout.x86_64 0:1.0.0-7.el7                                                   
+  libnetfilter_queue.x86_64 0:1.0.2-2.el7_2                                                     
+完毕！
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="按顺序启动服务">按顺序启动服务</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start etcd.service </span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start docker</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start kube-apiserver.service </span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start kube-controller-manager.service </span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start kube-scheduler.service </span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start kube-proxy.service </span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start kubelet.service </span>
+
+<span class="c1">#单机环境安装启动完成</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="如果启动kube-apiserverservice-时报错">如果启动kube-apiserver.service 时报错</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#方法1</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl start kube-apiserver.service </span>
+Job <span class="k">for</span> kube-apiserver.service failed because the control process exited with error code. See <span class="s2">&#34;systemctl status kube-apiserver.service&#34;</span> and <span class="s2">&#34;journalctl -xe&#34;</span> <span class="k">for</span> details.
+<span class="c1">#可能是因为8080端口被占用导致的,需要修改/etc/kubernetes/apiserver 的</span>
+<span class="nv">KUBE_API_PORT</span><span class="o">=</span><span class="s2">&#34;--port=8080&#34;</span>  将前面的#号删除,把端口修改为空闲端口号
+<span class="c1">#重启服务</span>
+<span class="o">[</span>root@localhost kubernetes<span class="o">]</span><span class="c1"># systemctl restart kube-apiserver.service </span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">#方法2
+#查看占用8080端口进程并干掉
+[root@localhost kubernetes]# netstat -lnpt | grep 8080
+[root@localhost kubernetes]# kill -9 pid
+#重启服务
+[root@localhost kubernetes]# systemctl restart kube-apiserver.service 
+[root@localhost kubernetes]# systemctl status kube-apiserver.service 
+● kube-apiserver.service - Kubernetes API Server
+   Loaded: loaded (/usr/lib/systemd/system/kube-apiserver.service; disabled; vendor preset: disabled)
+   Active: active (running) since 四 2021-06-24 15:11:23 CST; 10s ago
+     Docs: https://github.com/GoogleCloudPlatform/kubernetes
+ Main PID: 47030 (kube-apiserver)
+   Memory: 55.5M
+   CGroup: /system.slice/kube-apiserver.service
+           └─47030 /usr/bin/kube-apiserver --logtostderr=true --v=0 --etcd-servers=http://127.0.0.1:2379 --insecure-...
+</code></pre></td></tr></table>
+</div>
+</div><p>单机版安装完成.</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/docker/">Docker</a>
+          <a href="/tags/kubernetes/">Kubernetes</a>
+          <a href="/tags/k8s/">k8s</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E5%BC%80%E6%BA%90%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AEruoyi%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A4%9A%E5%AE%9E%E4%BE%8B%E9%83%A8%E7%BD%B2/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">开源前后端分离项目RuoYi的虚拟机多实例部署</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%873/">
+            <span class="next-text nav-default">日常娱乐环境准备(三)</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'xejwJ1mqtIJ6JAnKlCXzHODQ-gzGzoHsz',
+        appKey: 'WGB8ABQxGRsIT5gndRGMIMxg',
+        notify:  false ,
+        verify:  false ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://wyc1282.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Wang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

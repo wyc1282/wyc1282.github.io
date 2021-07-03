@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 野生猿的笔记</title>
+    <link>https://wyc1282.github.io/categories/</link>
+    <description>Recent content in Categories on 野生猿的笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 03 Jul 2021 16:32:36 +0800</lastBuildDate><atom:link href="https://wyc1282.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置文件</title>
+      <link>https://wyc1282.github.io/categories/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Sat, 03 Jul 2021 16:32:36 +0800</pubDate>
+      
+      <guid>https://wyc1282.github.io/categories/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>笔记</title>
+      <link>https://wyc1282.github.io/categories/%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sun, 27 Jun 2021 20:23:19 +0800</pubDate>
+      
+      <guid>https://wyc1282.github.io/categories/%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>软件使用</title>
+      <link>https://wyc1282.github.io/categories/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 21 Jun 2021 11:32:52 +0800</pubDate>
+      
+      <guid>https://wyc1282.github.io/categories/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

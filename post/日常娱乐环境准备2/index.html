@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>日常娱乐环境准备(二) - 野生猿的笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Wang" /><meta name="description" content="数据库MySQL5.7,缓存Redis5.0.6安装" /><meta name="keywords" content="MySQL, Redis, 数据库" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
+
+
+<link rel="canonical" href="https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%872/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.2e81bbed97b8b282c1aeb57488cc71c8d8c8ec559f3931531bd396bf31e0d4dd.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="日常娱乐环境准备(二)" />
+<meta property="og:description" content="数据库MySQL5.7,缓存Redis5.0.6安装" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%872/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-22T08:21:20&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-22T08:21:20&#43;08:00" />
+
+<meta itemprop="name" content="日常娱乐环境准备(二)">
+<meta itemprop="description" content="数据库MySQL5.7,缓存Redis5.0.6安装"><meta itemprop="datePublished" content="2021-06-22T08:21:20&#43;08:00" />
+<meta itemprop="dateModified" content="2021-06-22T08:21:20&#43;08:00" />
+<meta itemprop="wordCount" content="2441">
+<meta itemprop="keywords" content="数据库,MySQL,Redis," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="日常娱乐环境准备(二)"/>
+<meta name="twitter:description" content="数据库MySQL5.7,缓存Redis5.0.6安装"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Wang</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">档案</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">类别</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Wang</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">档案</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">类别</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">日常娱乐环境准备(二)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-22 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/"> 笔记 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#mysql数据库安装">MySQL数据库安装</a>
+          <ul>
+            <li><a href="#准备安装包">准备安装包</a></li>
+            <li><a href="#删除自带mariadb">删除自带Mariadb</a></li>
+            <li><a href="#解压mysql包">解压MySQL包</a></li>
+            <li><a href="#重命名文件夹">重命名文件夹</a></li>
+            <li><a href="#创建mysql用户和组">创建MySQL用户和组</a></li>
+            <li><a href="#修改文件夹所有者">修改文件夹所有者</a></li>
+            <li><a href="#准备mysql配置文件和相关目录">准备MySQL配置文件和相关目录</a></li>
+            <li><a href="#开始安装mysql数据库">开始安装MySQL数据库</a></li>
+            <li><a href="#设置自启">设置自启</a></li>
+            <li><a href="#启动mysqld">启动MYSQLD</a></li>
+            <li><a href="#将bin目录加入环境变量">将BIN目录加入环境变量</a></li>
+            <li><a href="#第一次登录">第一次登录</a></li>
+            <li><a href="#接下来修改root账户密码">接下来修改ROOT账户密码</a></li>
+            <li><a href="#设置远程主机登录">设置远程主机登录</a></li>
+            <li><a href="#利用数据库工具测试连接">利用数据库工具测试连接</a></li>
+          </ul>
+        </li>
+        <li><a href="#redis缓存安装部署">Redis缓存安装部署</a>
+          <ul>
+            <li><a href="#准备工作">准备工作</a></li>
+            <li><a href="#安装redis6时报错的解决办法">安装redis6时报错的解决办法</a></li>
+            <li><a href="#安装为系统服务并后台启动">安装为系统服务并后台启动</a></li>
+            <li><a href="#查看redis服务启动情况">查看REDIS服务启动情况</a></li>
+            <li><a href="#redis客户端测试">REDIS客户端测试</a></li>
+            <li><a href="#设置远程连接和访问密码">设置远程连接和访问密码</a></li>
+            <li><a href="#远程连接测试">远程连接测试</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <hr>
+<h2 id="mysql数据库安装">MySQL数据库安装</h2>
+<h3 id="准备安装包">准备安装包</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll</span>
+总用量 <span class="m">809348</span>
+-rw-r--r--   <span class="m">1</span> root root <span class="m">144935989</span> 4月  <span class="m">11</span> 05:47 jdk-8u291-linux-x64.tar.gz
+-rw-r--r--   <span class="m">1</span> root root <span class="m">665389778</span> 6月  <span class="m">23</span> 04:14 mysql-5.7.34-linux-glibc2.12-x86_64.tar.gz
+-rw-r--r--   <span class="m">1</span> root root  <span class="m">18433456</span> 5月   <span class="m">3</span> 18:34 Python-3.8.10.tar.xz
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="删除自带mariadb">删除自带Mariadb</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># rpm -qa | grep mariadb</span>
+mariadb-libs-5.5.68-1.el7.x86_64
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum remove mariadb-libs.x86_64 </span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="解压mysql包">解压MySQL包</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tar -zxvf mysql-5.7.34-linux-glibc2.12-x86_64.tar.gz </span>
+ -C /usr/local/
+mysql-5.7.34-linux-glibc2.12-x86_64/bin/myisam_ftdump
+...略...
+<span class="o">[</span>root@localhost local<span class="o">]</span><span class="c1"># ll</span>
+drwxr-xr-x   <span class="m">9</span> root root  <span class="m">129</span> 6月  <span class="m">23</span> 04:21 mysql-5.7.34-linux-glibc2.12-x86_64
+drwxr-xr-x   <span class="m">3</span> root root   <span class="m">36</span> 6月  <span class="m">23</span> 02:33 node
+drwxr-xr-x   <span class="m">6</span> root root   <span class="m">56</span> 6月  <span class="m">23</span> 03:12 python3
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="重命名文件夹">重命名文件夹</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost local<span class="o">]</span><span class="c1"># mv mysql-5.7.34-linux-glibc2.12-x86_64/ mysql</span>
+<span class="o">[</span>root@localhost local<span class="o">]</span><span class="c1"># ll</span>
+drwxr-xr-x   <span class="m">9</span> root root  <span class="m">129</span> 6月  <span class="m">23</span> 04:21 mysql
+drwxr-xr-x   <span class="m">3</span> root root   <span class="m">36</span> 6月  <span class="m">23</span> 02:33 node
+drwxr-xr-x   <span class="m">6</span> root root   <span class="m">56</span> 6月  <span class="m">23</span> 03:12 python3
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="创建mysql用户和组">创建MySQL用户和组</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost local<span class="o">]</span><span class="c1"># groupadd mysql</span>
+<span class="o">[</span>root@localhost local<span class="o">]</span><span class="c1"># useradd -g mysql mysql</span>
+<span class="o">[</span>root@localhost local<span class="o">]</span><span class="c1"># mkdir /usr/local/mysql/data</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="修改文件夹所有者">修改文件夹所有者</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost local<span class="o">]</span><span class="c1"># chown -R mysql:mysql /usr/local/mysql/</span>
+<span class="o">[</span>root@localhost local<span class="o">]</span><span class="c1"># ll</span>
+drwxr-xr-x  <span class="m">10</span> mysql mysql  <span class="m">141</span> 6月  <span class="m">23</span> 04:24 mysql
+drwxr-xr-x   <span class="m">3</span> root  root    <span class="m">36</span> 6月  <span class="m">23</span> 02:33 node
+drwxr-xr-x   <span class="m">6</span> root  root    <span class="m">56</span> 6月  <span class="m">23</span> 03:12 python3
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="准备mysql配置文件和相关目录">准备MySQL配置文件和相关目录</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#在 /etc ⽬录下新建 my.cnf ⽂件</span>
+<span class="o">[</span>root@localhost /<span class="o">]</span><span class="c1"># vim /etc/my.cnf</span>
+<span class="o">[</span>root@localhost /<span class="o">]</span><span class="c1"># mkdir /var/lib/mysql</span>
+<span class="o">[</span>root@localhost /<span class="o">]</span><span class="c1"># chmod 777 /var/lib/mysql</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/RuoYi2/image-20210623043241620.png" alt="image-20210623043241620"></p>
+<h3 id="开始安装mysql数据库">开始安装MySQL数据库</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost mysql]# ./bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
+...略...
+[Note] A temporary password is generated for root@localhost: e!*wc%9j(=hJ #这个是初始密码
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="设置自启">设置自启</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="c1"># cp support-files/mysql.server /etc/init.d/mysqld</span>
+<span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="c1"># vim /etc/init.d/mysqld</span>
+<span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="c1"># chmod +x /etc/init.d/mysqld</span>
+<span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="c1"># chkconfig --add mysqld</span>
+<span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="c1"># chkconfig --list mysqld</span>
+
+注：该输出结果只显示 SysV 服务，并不包含
+原生 systemd 服务。SysV 配置数据
+可能被原生 systemd 配置覆盖。 
+
+      要列出 systemd 服务，请执行 <span class="s1">&#39;systemctl list-unit-files&#39;</span>。
+      查看在具体 target 启用的服务请执行
+      <span class="s1">&#39;systemctl list-dependencies [target]&#39;</span>。
+
+mysqld         	0:关	1:关	2:开	3:开	4:开	5:开	6:关
+<span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/RuoYi2/image-20210623044253105.png" alt="image-20210623044253105"></p>
+<h3 id="启动mysqld">启动MYSQLD</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="c1"># systemctl status mysqld.service </span>
+● mysqld.service - LSB: start and stop MySQL
+   Loaded: loaded <span class="o">(</span>/etc/rc.d/init.d/mysqld<span class="p">;</span> bad<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+   Active: inactive <span class="o">(</span>dead<span class="o">)</span>
+     Docs: man:systemd-sysv-generator<span class="o">(</span>8<span class="o">)</span>
+<span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="c1"># systemctl start mysqld.service </span>
+<span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="c1"># systemctl status mysqld.service </span>
+● mysqld.service - LSB: start and stop MySQL
+   Loaded: loaded <span class="o">(</span>/etc/rc.d/init.d/mysqld<span class="p">;</span> bad<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+   Active: active <span class="o">(</span>running<span class="o">)</span> since 三 2021-06-23 04:45:51 CST<span class="p">;</span> 2s ago
+     Docs: man:systemd-sysv-generator<span class="o">(</span>8<span class="o">)</span>
+  Process: <span class="m">35293</span> <span class="nv">ExecStart</span><span class="o">=</span>/etc/rc.d/init.d/mysqld start <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+   CGroup: /system.slice/mysqld.service
+           ├─35304 /bin/sh /usr/local/mysql/bin/mysqld_safe --datadir<span class="o">=</span>...
+           └─35518 /usr/local/mysql/bin/mysqld --basedir<span class="o">=</span>/usr/local/my...
+
+6月 <span class="m">23</span> 04:45:50 localhost.localdomain systemd<span class="o">[</span>1<span class="o">]</span>: Starting LSB: start...
+6月 <span class="m">23</span> 04:45:50 localhost.localdomain mysqld<span class="o">[</span>35293<span class="o">]</span>: Starting MySQL.L...
+6月 <span class="m">23</span> 04:45:51 localhost.localdomain mysqld<span class="o">[</span>35293<span class="o">]</span>: SUCCESS!
+6月 <span class="m">23</span> 04:45:51 localhost.localdomain systemd<span class="o">[</span>1<span class="o">]</span>: Started LSB: start ...
+Hint: Some lines were ellipsized, use -l to show in full.
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="将bin目录加入环境变量">将BIN目录加入环境变量</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost mysql]# vim /root/.bash_profile 
+[root@localhost mysql]# source /root/.bash_profile 
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/RuoYi2/image-20210623044918271.png" alt="image-20210623044918271"></p>
+<h3 id="第一次登录">第一次登录</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost mysql<span class="o">]</span><span class="c1"># mysql -u root -p</span>
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span>.
+Your MySQL connection id is <span class="m">2</span>
+Server version: 5.7.34
+
+Copyright <span class="o">(</span>c<span class="o">)</span> 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type <span class="s1">&#39;help;&#39;</span> or <span class="s1">&#39;\h&#39;</span> <span class="k">for</span> help. Type <span class="s1">&#39;\c&#39;</span> to clear the current input statement.
+
+mysql&gt; 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="接下来修改root账户密码">接下来修改ROOT账户密码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">USER</span><span class="p">()</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s2">&#34;asdasd45&#34;</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="nf">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="nf">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">01</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="设置远程主机登录">设置远程主机登录</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">grant</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="k">identified</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="s2">&#34;密码&#34;</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="n">affected</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">warning</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="n">Query</span><span class="w"> </span><span class="n">OK</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="nf">affected</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">mysql</span><span class="w">
+</span><span class="w"></span><span class="n">Reading</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">completion</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">column</span><span class="w"> </span><span class="n">names</span><span class="w">
+</span><span class="w"></span><span class="n">You</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">turn</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">quicker</span><span class="w"> </span><span class="n">startup</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="o">-</span><span class="n">A</span><span class="w">
+</span><span class="w"></span><span class="k">Database</span><span class="w"> </span><span class="n">changed</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">user</span><span class="p">,</span><span class="n">host</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="k">user</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="o">+---------------+-----------+</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="k">user</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">host</span><span class="w">      </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+---------------+-----------+</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">root</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="w">         </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">session</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">localhost</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="n">sys</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">localhost</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">|</span><span class="w"> </span><span class="n">root</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">localhost</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span><span class="w"></span><span class="o">+---------------+-----------+</span><span class="w">
+</span><span class="w"></span><span class="mi">4</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="kt">set</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="利用数据库工具测试连接">利用数据库工具测试连接</h3>
+<p><img src="/images/RuoYi2/image-20210623050930087.png" alt="image-20210623050930087"></p>
+<p><img src="/images/RuoYi2/image-20210623051027405.png" alt="image-20210623051027405"></p>
+<hr>
+<h2 id="redis缓存安装部署">Redis缓存安装部署</h2>
+<h3 id="准备工作">准备工作</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">#解压
+[root@localhost ~]# tar -zxvf redis-6.0.6.tar.gz 
+[root@localhost ~]# ll
+drwxrwxr-x   7 root  root       4096 7月  21 2020 redis-6.0.6
+-rw-r--r--   1 root  root    2228781 6月  23 05:17 redis-6.0.6.tar.gz
+#创建文件夹
+[root@localhost ~]# mkdir /usr/local/redis
+[root@localhost ~]# cd /usr/local/redis
+#移动文件夹
+[root@localhost redis]# mv /root/redis-6.0.6 ./
+[root@localhost redis]# ll
+总用量 4
+drwxrwxr-x 7 root root 4096 7月  21 2020 redis-6.0.6
+#安装
+[root@localhost redis]# cd redis-6.0.6/
+[root@localhost redis]# make &amp;&amp; make install
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="安装redis6时报错的解决办法">安装redis6时报错的解决办法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#依赖包先搞一波</span>
+<span class="o">[</span>root@localhost redis-6.0.6<span class="o">]</span><span class="c1"># yum install -y gcc g++ gcc-c++ cpp binutils glibc  glibc-kernheaders glibc-common glibc-devel make</span>
+
+<span class="c1">#查看gcc的版本</span>
+<span class="o">[</span>root@localhost redis-6.0.6<span class="o">]</span><span class="c1"># gcc -v</span>
+gcc 版本 4.8.5 <span class="m">20150623</span> <span class="o">(</span>Red Hat 4.8.5-44<span class="o">)</span> <span class="o">(</span>GCC<span class="o">)</span> 
+
+<span class="c1">#gcc版本固过低,需要升级gcc版本.但过程漫长,不如换个低版本的Redis!!!!!下面是省时方法</span>
+<span class="o">[</span>root@localhost redis-6.0.6<span class="o">]</span><span class="c1"># yum -y install centos-release-scl</span>
+<span class="o">[</span>root@localhost redis-6.0.6<span class="o">]</span><span class="c1"># yum -y install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils</span>
+<span class="o">[</span>root@localhost redis-6.0.6<span class="o">]</span><span class="c1"># scl enable devtoolset-9 bash</span>
+<span class="c1">#修改环境变量</span>
+<span class="o">[</span>root@localhost redis-6.0.6<span class="o">]</span><span class="c1"># echo &#34;source /opt/rh/devtoolset-9/enable&#34; &gt;&gt; /etc/profile</span>
+<span class="o">[</span>root@localhost redis-6.0.6<span class="o">]</span><span class="c1"># gcc -v</span>
+<span class="o">[</span>root@localhost redis-6.0.6<span class="o">]</span><span class="c1"># make</span>
+<span class="o">[</span>root@localhost redis-6.0.6<span class="o">]</span><span class="c1"># make install</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="安装为系统服务并后台启动">安装为系统服务并后台启动</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost redis-5.0.12<span class="o">]</span><span class="c1"># cd utils/</span>
+<span class="o">[</span>root@localhost utils<span class="o">]</span><span class="c1"># ./install_server.sh </span>
+Welcome to the redis service installer
+This script will <span class="nb">help</span> you easily <span class="nb">set</span> up a running redis server
+
+Please <span class="k">select</span> the redis port <span class="k">for</span> this instance: <span class="o">[</span>6379<span class="o">]</span> 
+Selecting default: <span class="m">6379</span>
+Please <span class="k">select</span> the redis config file name <span class="o">[</span>/etc/redis/6379.conf<span class="o">]</span> 
+Selected default - /etc/redis/6379.conf
+Please <span class="k">select</span> the redis log file name <span class="o">[</span>/var/log/redis_6379.log<span class="o">]</span> 
+Selected default - /var/log/redis_6379.log
+Please <span class="k">select</span> the data directory <span class="k">for</span> this instance <span class="o">[</span>/var/lib/redis/6379<span class="o">]</span> 
+Selected default - /var/lib/redis/6379
+Please <span class="k">select</span> the redis executable path <span class="o">[</span>/usr/local/bin/redis-server<span class="o">]</span> 
+Selected config:
+Port           : <span class="m">6379</span>
+Config file    : /etc/redis/6379.conf
+Log file       : /var/log/redis_6379.log
+Data dir       : /var/lib/redis/6379
+Executable     : /usr/local/bin/redis-server
+Cli Executable : /usr/local/bin/redis-cli
+Is this ok? Then press ENTER to go on or Ctrl-C to abort.
+Copied /tmp/6379.conf <span class="o">=</span>&gt; /etc/init.d/redis_6379
+Installing service...
+Successfully added to chkconfig!
+Successfully added to runlevels 345!
+Starting Redis server...
+Installation successful!
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="查看redis服务启动情况">查看REDIS服务启动情况</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># systemctl status redis_6379.service </span>
+● redis_6379.service - LSB: start and stop redis_6379
+   Loaded: loaded <span class="o">(</span>/etc/rc.d/init.d/redis_6379<span class="p">;</span> bad<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+   Active: active <span class="o">(</span>running<span class="o">)</span> since 四 2021-06-24 02:54:40 CST<span class="p">;</span> 2s ago
+     Docs: man:systemd-sysv-generator<span class="o">(</span>8<span class="o">)</span>
+  Process: <span class="m">6038</span> <span class="nv">ExecStop</span><span class="o">=</span>/etc/rc.d/init.d/redis_6379 stop <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+  Process: <span class="m">6040</span> <span class="nv">ExecStart</span><span class="o">=</span>/etc/rc.d/init.d/redis_6379 start <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+   CGroup: /system.slice/redis_6379.service
+           └─6042 /usr/local/bin/redis-server 127.0.0.1:6379
+
+6月 <span class="m">24</span> 02:54:40 localhost.localdomain systemd<span class="o">[</span>1<span class="o">]</span>: Stopped LSB: start and stop redis_6379.
+6月 <span class="m">24</span> 02:54:40 localhost.localdomain systemd<span class="o">[</span>1<span class="o">]</span>: Starting LSB: start and stop redis_6379...
+6月 <span class="m">24</span> 02:54:40 localhost.localdomain redis_6379<span class="o">[</span>6040<span class="o">]</span>: Starting Redis server...
+6月 <span class="m">24</span> 02:54:40 localhost.localdomain systemd<span class="o">[</span>1<span class="o">]</span>: Started LSB: start and stop redis_6379.
+
+</code></pre></td></tr></table>
+</div>
+</div><p>启动Redis报错或者Active: active (exited) 的解决办法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost utils<span class="o">]</span><span class="c1"># cd /var/run/</span>
+<span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># ll</span>
+drwxr-xr-x  <span class="m">2</span> root   root     <span class="m">40</span> 6月  <span class="m">24</span> 00:29 plymouth
+-rw-r--r--  <span class="m">1</span> root   root      <span class="m">5</span> 6月  <span class="m">24</span> 02:45 redis_6379.pid
+<span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># rm -rf redis_6379.pid </span>
+<span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># ps -ef |grep redis</span>
+root       <span class="m">5807</span>      <span class="m">1</span>  <span class="m">0</span> 02:45 ?        00:00:00 /usr/local/bin/redis-server 127.0.0.1:6379
+root       <span class="m">5999</span>   <span class="m">1416</span>  <span class="m">0</span> 02:54 pts/0    00:00:00 grep --color<span class="o">=</span>auto redis
+<span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># kill -9 5807</span>
+<span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># systemctl restart redis_6379.service </span>
+<span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># systemctl status redis_6379.service </span>
+● redis_6379.service - LSB: start and stop redis_6379
+   Loaded: loaded <span class="o">(</span>/etc/rc.d/init.d/redis_6379<span class="p">;</span> bad<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+   Active: active <span class="o">(</span>running<span class="o">)</span> since 四 2021-06-24 02:54:40 CST<span class="p">;</span> 2s ago
+     Docs: man:systemd-sysv-generator<span class="o">(</span>8<span class="o">)</span>
+  Process: <span class="m">6038</span> <span class="nv">ExecStop</span><span class="o">=</span>/etc/rc.d/init.d/redis_6379 stop <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+  Process: <span class="m">6040</span> <span class="nv">ExecStart</span><span class="o">=</span>/etc/rc.d/init.d/redis_6379 start <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+   CGroup: /system.slice/redis_6379.service
+           └─6042 /usr/local/bin/redis-server 127.0.0.1:6379
+
+6月 <span class="m">24</span> 02:54:40 localhost.localdomain systemd<span class="o">[</span>1<span class="o">]</span>: Stopped LSB: start and stop redis_6379.
+6月 <span class="m">24</span> 02:54:40 localhost.localdomain systemd<span class="o">[</span>1<span class="o">]</span>: Starting LSB: start and stop redis_6379...
+6月 <span class="m">24</span> 02:54:40 localhost.localdomain redis_6379<span class="o">[</span>6040<span class="o">]</span>: Starting Redis server...
+6月 <span class="m">24</span> 02:54:40 localhost.localdomain systemd<span class="o">[</span>1<span class="o">]</span>: Started LSB: start and stop redis_6379.
+<span class="c1">#启动成功</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="redis客户端测试">REDIS客户端测试</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># redis-cli </span>
+127.0.0.1:6379&gt; <span class="nb">set</span> foo asd
+OK
+127.0.0.1:6379&gt; get foo
+<span class="s2">&#34;asd&#34;</span>
+127.0.0.1:6379&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="设置远程连接和访问密码">设置远程连接和访问密码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#编辑redis配置文件</span>
+<span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># vim /etc/redis/6379.conf </span>
+</code></pre></td></tr></table>
+</div>
+</div><p>设置远程访问将bind 127.0.0.1 改为 0.0.0.0</p>
+<p><img src="/images/RuoYi2/image-20210624030456937.png" alt="image-20210624030456937"></p>
+<p>设置密码将 #requirepass foobared 前的井号删除，foobared替换成个人密码</p>
+<p><img src="/images/RuoYi2/image-20210624030729118.png" alt="image-20210624030729118"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#重启服务</span>
+<span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># systemctl status redis_6379.service </span>
+● redis_6379.service - LSB: start and stop redis_6379
+   Loaded: loaded <span class="o">(</span>/etc/rc.d/init.d/redis_6379<span class="p">;</span> bad<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+   Active: active <span class="o">(</span>running<span class="o">)</span> since 四 2021-06-24 03:08:15 CST<span class="p">;</span> 2s ago
+     Docs: man:systemd-sysv-generator<span class="o">(</span>8<span class="o">)</span>
+  Process: <span class="m">6803</span> <span class="nv">ExecStop</span><span class="o">=</span>/etc/rc.d/init.d/redis_6379 stop <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+  Process: <span class="m">6808</span> <span class="nv">ExecStart</span><span class="o">=</span>/etc/rc.d/init.d/redis_6379 start <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+   CGroup: /system.slice/redis_6379.service
+           └─6810 /usr/local/bin/redis-server 0.0.0.0:6379
+
+6月 <span class="m">24</span> 03:08:15 localhost.localdomain systemd<span class="o">[</span>1<span class="o">]</span>: Starting LSB: start and stop redis_6379...
+6月 <span class="m">24</span> 03:08:15 localhost.localdomain redis_6379<span class="o">[</span>6808<span class="o">]</span>: Starting Redis server...
+6月 <span class="m">24</span> 03:08:15 localhost.localdomain systemd<span class="o">[</span>1<span class="o">]</span>: Started LSB: start and stop redis_6379.
+<span class="o">[</span>root@localhost run<span class="o">]</span><span class="c1"># </span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="远程连接测试">远程连接测试</h3>
+<p><img src="/images/RuoYi2/image-20210624031232450.png" alt="image-20210624031232450"></p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+          <a href="/tags/mysql/">MySQL</a>
+          <a href="/tags/redis/">Redis</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%873/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">日常娱乐环境准备(三)</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E7%94%A8typora%E7%BC%96%E8%BE%91hugo%E5%B8%96%E5%AD%90%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/">
+            <span class="next-text nav-default">用Typora软件在本地编辑HUGO帖子插入图片</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'xejwJ1mqtIJ6JAnKlCXzHODQ-gzGzoHsz',
+        appKey: 'WGB8ABQxGRsIT5gndRGMIMxg',
+        notify:  false ,
+        verify:  false ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://wyc1282.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Wang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

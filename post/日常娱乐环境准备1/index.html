@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>日常娱乐环境准备(一) - 野生猿的笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Wang" /><meta name="description" content="VM虚拟机安装centos7.9,安装配置Git,JDK1.8.0_291,Python3.8,NODEv12.6.0,Maven3.8.1" /><meta name="keywords" content="环境准备, Linux, JAVA, Python, Git, Node, Maven" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
+
+
+<link rel="canonical" href="https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%871/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.2e81bbed97b8b282c1aeb57488cc71c8d8c8ec559f3931531bd396bf31e0d4dd.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="日常娱乐环境准备(一)" />
+<meta property="og:description" content="VM虚拟机安装centos7.9,安装配置Git,JDK1.8.0_291,Python3.8,NODEv12.6.0,Maven3.8.1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wyc1282.github.io/post/%E6%97%A5%E5%B8%B8%E5%A8%B1%E4%B9%90%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%871/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-06-21T08:20:21&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-21T08:20:21&#43;08:00" />
+
+<meta itemprop="name" content="日常娱乐环境准备(一)">
+<meta itemprop="description" content="VM虚拟机安装centos7.9,安装配置Git,JDK1.8.0_291,Python3.8,NODEv12.6.0,Maven3.8.1"><meta itemprop="datePublished" content="2021-06-21T08:20:21&#43;08:00" />
+<meta itemprop="dateModified" content="2021-06-21T08:20:21&#43;08:00" />
+<meta itemprop="wordCount" content="2823">
+<meta itemprop="keywords" content="Linux,JAVA,Python,Git,Node,Maven," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="日常娱乐环境准备(一)"/>
+<meta name="twitter:description" content="VM虚拟机安装centos7.9,安装配置Git,JDK1.8.0_291,Python3.8,NODEv12.6.0,Maven3.8.1"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Wang</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">档案</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">类别</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Wang</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">档案</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">类别</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">日常娱乐环境准备(一)</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-06-21 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/"> 笔记 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#虚拟机-centos-79-安装配置">虚拟机 CentOS 7.9 安装配置</a>
+          <ul>
+            <li><a href="#向导设置">向导设置</a></li>
+            <li><a href="#启动安装">启动安装</a></li>
+            <li><a href="#磁盘分区">磁盘分区</a></li>
+            <li><a href="#等待安装完成">等待安装完成</a></li>
+            <li><a href="#用ssh连接">用SSH连接</a></li>
+            <li><a href="#配置网络">配置网络</a></li>
+            <li><a href="#安装命令补全">安装命令补全</a></li>
+            <li><a href="#更新rpm软件包">更新RPM软件包</a></li>
+            <li><a href="#无法更新或者特别慢则需要换国内软件源">无法更新或者特别慢则需要换国内软件源</a></li>
+            <li><a href="#关闭selinux和防火墙">关闭SELINUX和防火墙</a></li>
+          </ul>
+        </li>
+        <li><a href="#git工具安装">Git工具安装</a>
+          <ul>
+            <li><a href="#下载安装">下载安装</a></li>
+            <li><a href="#下面为相关安装包下载路径">下面为相关安装包下载路径</a></li>
+            <li><a href="#检查安装结果">检查安装结果</a></li>
+          </ul>
+        </li>
+        <li><a href="#jdk环境安装">JDK环境安装</a>
+          <ul>
+            <li><a href="#下载jdk">下载JDK</a></li>
+            <li><a href="#在usrlocal下创建java文件夹">在/usr/local/下创建Java文件夹</a></li>
+            <li><a href="#将压缩包解压到目录下">将压缩包解压到目录下</a></li>
+            <li><a href="#配置jdk环境变量">配置JDK环境变量</a></li>
+            <li><a href="#验证安装">验证安装</a></li>
+          </ul>
+        </li>
+        <li><a href="#node环境安装">NODE环境安装</a>
+          <ul>
+            <li><a href="#在usrlocal下创建node文件夹">在/usr/local/下创建node文件夹</a></li>
+            <li><a href="#将安装包解压到node文件夹">将安装包解压到node文件夹</a></li>
+            <li><a href="#配置node环境变量">配置NODE环境变量</a></li>
+            <li><a href="#验证安装-1">验证安装</a></li>
+          </ul>
+        </li>
+        <li><a href="#python环境安装">PYTHON环境安装</a>
+          <ul>
+            <li><a href="#下载解压安装">下载解压安装</a></li>
+            <li><a href="#验证安装-2">验证安装</a></li>
+          </ul>
+        </li>
+        <li><a href="#maven项构建和管理具安装">MAVEN项⽬构建和管理⼯具安装</a>
+          <ul>
+            <li><a href="#创建目录解压换源">创建目录解压换源</a></li>
+            <li><a href="#配置环境变量">配置环境变量</a></li>
+            <li><a href="#验证安装-3">验证安装</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <hr>
+<h2 id="虚拟机-centos-79-安装配置">虚拟机 CentOS 7.9 安装配置</h2>
+<h3 id="向导设置">向导设置</h3>
+<p><img src="/images/RuoYi/image-20210621085709893.png" alt="image-20210621085709893"></p>
+<p><img src="/images/RuoYi/image-20210621085728461.png" alt="image-20210621085728461"></p>
+<p><img src="/images/RuoYi/image-20210621085738527.png" alt="image-20210621085738527"></p>
+<p><img src="/images/RuoYi/image-20210621085753637.png" alt="image-20210621085753637"></p>
+<p><img src="/images/RuoYi/image-20210621085819121.png" alt="image-20210621085819121"></p>
+<p><img src="/images/RuoYi/image-20210621085827605.png" alt="image-20210621085827605"></p>
+<p><img src="/images/RuoYi/image-20210621085838917.png" alt="image-20210621085838917"></p>
+<p><img src="/images/RuoYi/image-20210621085848656.png" alt="image-20210621085848656"></p>
+<p><img src="/images/RuoYi/image-20210621085913502.png" alt="image-20210621085913502"></p>
+<p><img src="/images/RuoYi/image-20210621085922346.png" alt="image-20210621085922346"></p>
+<p><img src="/images/RuoYi/image-20210621090023121.png" alt="image-20210621090023121"></p>
+<p><img src="/images/RuoYi/image-20210621090040216.png" alt="image-20210621090040216"></p>
+<p><img src="/images/RuoYi/image-20210621090109657.png" alt="image-20210621090109657"></p>
+<h3 id="启动安装">启动安装</h3>
+<h4 id="这里我选的是最小安装">这里我选的是最小安装</h4>
+<p><img src="/images/RuoYi/image-20210621090937214.png" alt="image-20210621090937214"></p>
+<h3 id="磁盘分区">磁盘分区</h3>
+<p><img src="/images/RuoYi/image-20210621091100079.png" alt="image-20210621091100079"></p>
+<p><img src="/images/RuoYi/image-20210621091218393.png" alt="image-20210621091218393"></p>
+<h3 id="等待安装完成">等待安装完成</h3>
+<p><img src="/images/RuoYi/image-20210621092848938-1624397005293.png" alt="image-20210621092848938"></p>
+<h3 id="用ssh连接">用SSH连接</h3>
+<p><img src="/images/RuoYi/image-20210621093541005.png" alt="image-20210621093541005"></p>
+<h3 id="配置网络">配置网络</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># nmtui			#配置网络信息</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/RuoYi/image-20210621094808010.png" alt="image-20210621094808010"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># nmcli </span>
+ens33: 已连接 to ens33
+        <span class="s2">&#34;Intel 80000EM&#34;</span>
+        ethernet <span class="o">(</span>e1000<span class="o">)</span>, 00:00:00:00:00:00, 硬件, mtu <span class="m">1500</span>
+        ip4 默认
+        inet4 192.168.8.201/24
+        route4 192.168.8.0/24
+        route4 0.0.0.0/0
+        inet6 <span class="m">000000000000</span>
+        route6 fe80::/64
+        route6 ff00::/8
+
+lo: 未托管
+        <span class="s2">&#34;lo&#34;</span>
+        loopback <span class="o">(</span>unknown<span class="o">)</span>, 00:00:00:00:00:00, 软件, mtu <span class="m">65536</span>
+
+DNS configuration:
+        servers: 192.168.8.1
+        interface: ens33
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="安装命令补全">安装命令补全</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install bash-completion -y </span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="更新rpm软件包">更新RPM软件包</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum update -y</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="无法更新或者特别慢则需要换国内软件源">无法更新或者特别慢则需要换国内软件源</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /etc/yum.repos.d/</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># ll</span>
+总用量 <span class="m">40</span>
+-rw-r--r--. <span class="m">1</span> root root <span class="m">1664</span> 11月 <span class="m">23</span> <span class="m">2020</span> CentOS-Base.repo
+-rw-r--r--. <span class="m">1</span> root root <span class="m">1309</span> 11月 <span class="m">23</span> <span class="m">2020</span> CentOS-CR.repo
+-rw-r--r--. <span class="m">1</span> root root  <span class="m">649</span> 11月 <span class="m">23</span> <span class="m">2020</span> CentOS-Debuginfo.repo
+-rw-r--r--. <span class="m">1</span> root root  <span class="m">314</span> 11月 <span class="m">23</span> <span class="m">2020</span> CentOS-fasttrack.repo
+-rw-r--r--. <span class="m">1</span> root root  <span class="m">630</span> 11月 <span class="m">23</span> <span class="m">2020</span> CentOS-Media.repo
+-rw-r--r--. <span class="m">1</span> root root <span class="m">1331</span> 11月 <span class="m">23</span> <span class="m">2020</span> CentOS-Sources.repo
+-rw-r--r--. <span class="m">1</span> root root <span class="m">8515</span> 11月 <span class="m">23</span> <span class="m">2020</span> CentOS-Vault.repo
+-rw-r--r--. <span class="m">1</span> root root  <span class="m">616</span> 11月 <span class="m">23</span> <span class="m">2020</span> CentOS-x86_64-kernel.repo
+
+<span class="c1">#先备份一下系统自带的软件源配置文件</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># tar -cvf bak.tar ./*</span>
+
+安装下载工具
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum install -y wget</span>
+
+<span class="c1">#删除系统源</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># rm -rf CentOS-*</span>
+
+<span class="c1">#下载阿里源</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># wget http://mirrors.aliyun.com/repo/Centos-7.repo</span>
+--2021-06-21 10:25:05--  http://mirrors.aliyun.com/repo/Centos-7.repo
+正在解析主机 mirrors.aliyun.com <span class="o">(</span>mirrors.aliyun.com<span class="o">)</span>... 150.139.240.239, 150.139.240.236, 150.139.240.248, ...
+正在连接 mirrors.aliyun.com <span class="o">(</span>mirrors.aliyun.com<span class="o">)</span>
+
+<span class="c1">#更新软件包缓存</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># yum makecache</span>
+已加载插件：fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyun.com
+ * extras: mirrors.aliyun.com
+略
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="关闭selinux和防火墙">关闭SELINUX和防火墙</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#关闭SELINUX</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># vim /etc/selinux/config </span>
+<span class="c1">#SELINUX=disabled</span>
+<span class="c1">#关闭防护墙</span>
+systemctl stop firewalld
+<span class="c1">#禁用自动启动</span>
+<span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># systemctl disable firewalld</span>
+Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="git工具安装">Git工具安装</h2>
+<h3 id="下载安装">下载安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install -y git</span>
+略
+  正在安装    : 1:perl-Error-0.17020-2.el7.noarch         1/5 
+  正在安装    : rsync-3.1.2-10.el7.x86_64                 2/5 
+  正在安装    : perl-TermReadKey-2.30-20.el7.x86_64       3/5 
+  正在安装    : perl-Git-1.8.3.1-23.el7_8.noarch          4/5 
+  正在安装    : git-1.8.3.1-23.el7_8.x86_64               5/5 
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="下面为相关安装包下载路径">下面为相关安装包下载路径</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost packages]# cd /var/cache/yum/x86_64/7/base/packages
+[root@localhost packages]# ll
+总用量 5036
+-rw-r--r-- 1 root root 4613232 5月  30 2020 git-1.8.3.1-23.el7_8.x86_64.rpm
+-rw-r--r-- 1 root root   32468 7月   4 2014 perl-Error-0.17020-2.el7.noarch.rpm
+-rw-r--r-- 1 root root   57236 5月  30 2020 perl-Git-1.8.3.1-23.el7_8.noarch.rpm
+-rw-r--r-- 1 root root   31916 7月   4 2014 perl-TermReadKey-2.30-20.el7.x86_64.rpm
+-rw-r--r-- 1 root root  413912 4月   4 2020 rsync-3.1.2-10.el7.x86_64.rpm
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="检查安装结果">检查安装结果</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost /]# git --version
+git version 1.8.3.1
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="jdk环境安装">JDK环境安装</h2>
+<h3 id="下载jdk">下载JDK</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># wget https://download.oracle.com/otn/java/jdk/8u291-b10/d7fc238d0cbf4b0dac67be84580cfb4b/jdk-8u291-linux-x64.tar.gz</span>
+--2021-06-23 02:04:00--  https://download.oracle.com/otn/java/jdk/8u291-b10/d7fc238d0cbf4b0dac67be84580cfb4b/jdk-8u291-linux-x64.tar.gz
+正在解析主机 download.oracle.com <span class="o">(</span>download.oracle.com<span class="o">)</span>... 23.35.180.41
+正在连接 download.oracle.com <span class="o">(</span>download.oracle.com<span class="o">)</span><span class="p">|</span>23.35.180.41<span class="p">|</span>:443... 已连接。
+已发出 HTTP 请求，正在等待回应... <span class="m">200</span> OK
+长度：144935989 <span class="o">(</span>138M<span class="o">)</span> <span class="o">[</span>application/x-gzip<span class="o">]</span>
+正在保存至: “jdk-8u291-linux-x64.tar.gz
+100%<span class="o">[=============================</span>&gt;<span class="o">]</span> 144,935,989 16.3MB/s 用时 9.2s   
+2021-06-23 02:04:10 <span class="o">(</span>15.0 MB/s<span class="o">)</span> - 已保存 “jdk-8u291-linux-x64.tar.gz” <span class="o">[</span>144935989/144935989<span class="o">])</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll</span>
+总用量 <span class="m">141544</span>
+-rw-------. <span class="m">1</span> root root      <span class="m">1628</span> 6月  <span class="m">21</span> 09:18 anaconda-ks.cfg
+-rw-r--r--  <span class="m">1</span> root root <span class="m">144935989</span> 4月  <span class="m">11</span> 05:47 jdk-8u291-linux-x64.tar.gz
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="在usrlocal下创建java文件夹">在/usr/local/下创建Java文件夹</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost ~]# mkdir /usr/local/java
+[root@localhost ~]# cd /usr/local/java
+[root@localhost java]# 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="将压缩包解压到目录下">将压缩包解压到目录下</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost java<span class="o">]</span><span class="c1"># tar -zxvf /root/jdk-8u291-linux-x64.tar.gz -C ./ </span>
+...略...
+jdk1.8.0_291/jmc.txt
+<span class="o">[</span>root@localhost java<span class="o">]</span><span class="c1"># ll</span>
+总用量 <span class="m">0</span>
+drwxr-xr-x <span class="m">8</span> <span class="m">10143</span> <span class="m">10143</span> <span class="m">273</span> 4月   <span class="m">8</span> 03:26 jdk1.8.0_291
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="配置jdk环境变量">配置JDK环境变量</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#编辑/etc/profile文件</span>
+<span class="o">[</span>root@localhost java<span class="o">]</span><span class="c1"># vim /etc/profile  </span>
+<span class="c1">#在配置文件中加入下面内容</span>
+<span class="c1">#JAVA</span>
+<span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/local/java/jdk1.8.0_291
+<span class="nv">CLASSPATH</span><span class="o">=</span><span class="nv">$JAVA_HOME</span>/lib
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JAVA_HOME</span>/bin
+<span class="nb">export</span> PATH JAVA_HOME CLASSPATH
+<span class="c1">#保存后让环境变量生效</span>
+<span class="o">[</span>root@localhost jdk1.8.0_291<span class="o">]</span><span class="c1"># source /etc/profile</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="验证安装">验证安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost jdk1.8.0_291<span class="o">]</span><span class="c1"># java -version</span>
+java version <span class="s2">&#34;1.8.0_291&#34;</span>
+Java<span class="o">(</span>TM<span class="o">)</span> SE Runtime Environment <span class="o">(</span>build 1.8.0_291-b10<span class="o">)</span>
+Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM <span class="o">(</span>build 25.291-b10, mixed mode<span class="o">)</span>
+
+<span class="o">[</span>root@localhost jdk1.8.0_291<span class="o">]</span><span class="c1"># javac</span>
+用法: javac &lt;options&gt; &lt;<span class="nb">source</span> files&gt;
+其中, 可能的选项包括:
+  -g                         生成所有调试信息
+  -g:none                    不生成任何调试信息
+  -g:<span class="o">{</span>lines,vars,source<span class="o">}</span>     只生成某些调试信息
+  -nowarn                    不生成任何警告
+  -verbose                   输出有关编译器正在执行的操作的消息
+  -deprecation               输出使用已过时的 API 的源位置
+  -classpath &lt;路径&gt;            指定查找用户类文件和注释处理程序的位置
+  -cp &lt;路径&gt;                   指定查找用户类文件和注释处理程序的位置
+  -sourcepath &lt;路径&gt;           指定查找输入源文件的位置
+  -bootclasspath &lt;路径&gt;        覆盖引导类文件的位置
+  -extdirs &lt;目录&gt;              覆盖所安装扩展的位置
+  -endorseddirs &lt;目录&gt;         覆盖签名的标准路径的位置
+  -proc:<span class="o">{</span>none,only<span class="o">}</span>          控制是否执行注释处理和/或编译。
+  -processor &lt;class1&gt;<span class="o">[</span>,&lt;class2&gt;,&lt;class3&gt;...<span class="o">]</span> 要运行的注释处理程序的名称<span class="p">;</span> 绕过默认的搜索进程
+  -processorpath &lt;路径&gt;        指定查找注释处理程序的位置
+  -parameters                生成元数据以用于方法参数的反射
+  -d &lt;目录&gt;                    指定放置生成的类文件的位置
+  -s &lt;目录&gt;                    指定放置生成的源文件的位置
+  -h &lt;目录&gt;                    指定放置生成的本机标头文件的位置
+  -implicit:<span class="o">{</span>none,class<span class="o">}</span>     指定是否为隐式引用文件生成类文件
+  -encoding &lt;编码&gt;             指定源文件使用的字符编码
+  -source &lt;发行版&gt;              提供与指定发行版的源兼容性
+  -target &lt;发行版&gt;              生成特定 VM 版本的类文件
+  -profile &lt;配置文件&gt;            请确保使用的 API 在指定的配置文件中可用
+  -version                   版本信息
+  -help                      输出标准选项的提要
+  -A关键字<span class="o">[=</span>值<span class="o">]</span>                  传递给注释处理程序的选项
+  -X                         输出非标准选项的提要
+  -J&lt;标记&gt;                     直接将 &lt;标记&gt; 传递给运行时系统
+  -Werror                    出现警告时终止编译
+  @&lt;文件名&gt;                     从文件读取选项和文件名
+
+<span class="o">[</span>root@localhost jdk1.8.0_291<span class="o">]</span><span class="c1"># JDK安装完成</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="node环境安装">NODE环境安装</h2>
+<h3 id="在usrlocal下创建node文件夹">在/usr/local/下创建node文件夹</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># mkdir /usr/local/node</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd /usr/local/node</span>
+<span class="o">[</span>root@localhost node<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="将安装包解压到node文件夹">将安装包解压到node文件夹</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost node<span class="o">]</span><span class="c1"># tar -zxvf node-v12.6.0-linux-x64.tar.gz </span>
+...略...
+node-v12.6.0-linux-x64/CHANGELOG.md
+<span class="o">[</span>root@localhost node<span class="o">]</span><span class="c1"># ll</span>
+<span class="o">[</span>root@localhost node<span class="o">]</span><span class="c1"># ll</span>
+总用量 <span class="m">20824</span>
+drwxr-xr-x <span class="m">6</span> <span class="m">1001</span> <span class="m">1001</span>      <span class="m">108</span> 7月   <span class="m">3</span> <span class="m">2019</span> node-v12.6.0-linux-x64
+-rw-r--r-- <span class="m">1</span> root root <span class="m">21321034</span> 6月  <span class="m">23</span> 02:31 node-v12.6.0-linux-x64.tar.gz
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="配置node环境变量">配置NODE环境变量</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@localhost node<span class="o">]</span><span class="c1"># cd node-v12.6.0-linux-x64/</span>
+<span class="o">[</span>root@localhost node-v12.6.0-linux-x64<span class="o">]</span><span class="c1"># pwd</span>
+/usr/local/node/node-v12.6.0-linux-x64
+<span class="o">[</span>root@localhost node-v12.6.0-linux-x64<span class="o">]</span><span class="c1"># vim /etc/profile</span>
+<span class="c1">#在文件中加入以下内容</span>
+
+<span class="c1">#NODE</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/usr/local/node/node-v12.6.0-linux-x64/bin:<span class="nv">$PATH</span>
+<span class="c1">#使配置文件生效</span>
+<span class="o">[</span>root@localhost node-v12.6.0-linux-x64<span class="o">]</span><span class="c1"># soure /etc/profile</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="验证安装-1">验证安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># node -v</span>
+v12.6.0
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># npm version</span>
+<span class="o">{</span>
+  npm: <span class="s1">&#39;6.9.0&#39;</span>,
+  ares: <span class="s1">&#39;1.15.0&#39;</span>,
+  brotli: <span class="s1">&#39;1.0.7&#39;</span>,
+  cldr: <span class="s1">&#39;35.1&#39;</span>,
+  http_parser: <span class="s1">&#39;2.8.0&#39;</span>,
+  icu: <span class="s1">&#39;64.2&#39;</span>,
+  llhttp: <span class="s1">&#39;1.1.4&#39;</span>,
+  modules: <span class="s1">&#39;72&#39;</span>,
+  napi: <span class="s1">&#39;4&#39;</span>,
+  nghttp2: <span class="s1">&#39;1.38.0&#39;</span>,
+  node: <span class="s1">&#39;12.6.0&#39;</span>,
+  openssl: <span class="s1">&#39;1.1.1c&#39;</span>,
+  tz: <span class="s1">&#39;2019a&#39;</span>,
+  unicode: <span class="s1">&#39;12.1&#39;</span>,
+  uv: <span class="s1">&#39;1.30.1&#39;</span>,
+  v8: <span class="s1">&#39;7.5.288.22-node.14&#39;</span>,
+  zlib: <span class="s1">&#39;1.2.11&#39;</span>
+<span class="o">}</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># npx -v</span>
+6.9.0
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># NODE安装完毕</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="python环境安装">PYTHON环境安装</h2>
+<h3 id="下载解压安装">下载解压安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#下载</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tar.xz</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll</span>
+总用量 <span class="m">159552</span>
+-rw-------.  <span class="m">1</span> root root      <span class="m">1628</span> 6月  <span class="m">21</span> 09:18 anaconda-ks.cfg
+-rw-r--r--   <span class="m">1</span> root root <span class="m">144935989</span> 4月  <span class="m">11</span> 05:47 jdk-8u291-linux-x64.tar.gz
+
+<span class="c1">#解压</span>
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># tar -Jxvf Python-3.8.10.tar.xz </span>
+...略...
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># ll</span>
+总用量 <span class="m">159552</span>
+-rw-------.  <span class="m">1</span> root root      <span class="m">1628</span> 6月  <span class="m">21</span> 09:18 anaconda-ks.cfg
+-rw-r--r--   <span class="m">1</span> root root <span class="m">144935989</span> 4月  <span class="m">11</span> 05:47 jdk-8u291-linux-x64.tar.gz
+drwxrwxr-x  <span class="m">16</span> <span class="m">1000</span> <span class="m">1000</span>      <span class="m">4096</span> 5月   <span class="m">3</span> 18:11 Python-3.8.10
+-rw-r--r--   <span class="m">1</span> root root  <span class="m">18433456</span> 5月   <span class="m">3</span> 18:34 Python-3.8.10.tar.xz
+
+安装
+<span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cd Python-3.8.10/</span>
+<span class="o">[</span>root@localhost Python-3.8.10<span class="o">]</span><span class="c1"># ./configure prefix=/usr/local/python3</span>
+...略...
+
+<span class="o">[</span>root@localhost Python-3.8.10<span class="o">]</span><span class="c1"># make &amp;&amp; make install</span>
+...略...
+<span class="c1">#软连接一下</span>
+<span class="o">[</span>root@localhost bin<span class="o">]</span><span class="c1"># ln pip3 /usr/bin/pip3</span>
+<span class="o">[</span>root@localhost bin<span class="o">]</span><span class="c1"># ln python3 /usr/bin/python3</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="验证安装-2">验证安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost bin<span class="o">]</span><span class="c1"># python3</span>
+Python 3.8.10 <span class="o">(</span>default, Jun <span class="m">23</span> 2021, 03:11:54<span class="o">)</span> 
+<span class="o">[</span>GCC 4.8.5 <span class="m">20150623</span> <span class="o">(</span>Red Hat 4.8.5-44<span class="o">)]</span> on linux
+Type <span class="s2">&#34;help&#34;</span>, <span class="s2">&#34;copyright&#34;</span>, <span class="s2">&#34;credits&#34;</span> or <span class="s2">&#34;license&#34;</span> <span class="k">for</span> more information.
+&gt;&gt;&gt; exit<span class="o">()</span>
+
+
+<span class="o">[</span>root@localhost bin<span class="o">]</span><span class="c1"># pip3</span>
+
+Usage:   
+  pip3 &lt;command&gt; <span class="o">[</span>options<span class="o">]</span>
+
+Commands:
+  install                     Install packages.
+  download                    Download packages.
+  uninstall                   Uninstall packages.
+  freeze                      Output installed packages in requirements format.
+  list                        List installed packages.
+  show                        Show information about installed packages.
+  check                       Verify installed packages have compatible dependencies.
+  config                      Manage <span class="nb">local</span> and global configuration.
+  search                      Search PyPI <span class="k">for</span> packages.
+  cache                       Inspect and manage pip<span class="s1">&#39;s wheel cache.
+</span><span class="s1">  wheel                       Build wheels from your requirements.
+</span><span class="s1">  hash                        Compute hashes of package archives.
+</span><span class="s1">  completion                  A helper command used for command completion.
+</span><span class="s1">  debug                       Show information useful for debugging.
+</span><span class="s1">  help                        Show help for commands.
+</span><span class="s1">
+</span><span class="s1">General Options:
+</span><span class="s1">  -h, --help                  Show help.
+</span><span class="s1">  --isolated                  Run pip in an isolated mode, ignoring
+</span><span class="s1">                              environment variables and user
+</span><span class="s1">                              configuration.
+</span><span class="s1">  -v, --verbose               Give more output. Option is additive,
+</span><span class="s1">                              and can be used up to 3 times.
+</span><span class="s1">  -V, --version               Show version and exit.
+</span><span class="s1">  -q, --quiet                 Give less output. Option is additive,
+</span><span class="s1">                              and can be used up to 3 times
+</span><span class="s1">                              (corresponding to WARNING, ERROR, and
+</span><span class="s1">                              CRITICAL logging levels).
+</span><span class="s1">  --log &lt;path&gt;                Path to a verbose appending log.
+</span><span class="s1">  --no-input                  Disable prompting for input.
+</span><span class="s1">  --proxy &lt;proxy&gt;             Specify a proxy in the form
+</span><span class="s1">                              [user:passwd@]proxy.server:port.
+</span><span class="s1">  --retries &lt;retries&gt;         Maximum number of retries each
+</span><span class="s1">                              connection should attempt (default 5
+</span><span class="s1">                              times).
+</span><span class="s1">  --timeout &lt;sec&gt;             Set the socket timeout (default 15
+</span><span class="s1">                              seconds).
+</span><span class="s1">  --exists-action &lt;action&gt;    Default action when a path already
+</span><span class="s1">                              exists: (s)witch, (i)gnore, (w)ipe,
+</span><span class="s1">                              (b)ackup, (a)bort.
+</span><span class="s1">  --trusted-host &lt;hostname&gt;   Mark this host or host:port pair as
+</span><span class="s1">                              trusted, even though it does not have
+</span><span class="s1">                              valid or any HTTPS.
+</span><span class="s1">  --cert &lt;path&gt;               Path to PEM-encoded CA certificate
+</span><span class="s1">                              bundle. If provided, overrides the
+</span><span class="s1">                              default. See &#39;</span>SSL Certificate
+                              Verification<span class="s1">&#39; in pip documentation for
+</span><span class="s1">                              more information.
+</span><span class="s1">  --client-cert &lt;path&gt;        Path to SSL client certificate, a
+</span><span class="s1">                              single file containing the private key
+</span><span class="s1">                              and the certificate in PEM format.
+</span><span class="s1">  --cache-dir &lt;dir&gt;           Store the cache data in &lt;dir&gt;.
+</span><span class="s1">  --no-cache-dir              Disable the cache.
+</span><span class="s1">  --disable-pip-version-check
+</span><span class="s1">                              Don&#39;</span>t periodically check PyPI to
+                              determine whether a new version of pip
+                              is available <span class="k">for</span> download. Implied with
+                              --no-index.
+  --no-color                  Suppress colored output.
+  --no-python-version-warning
+                              Silence deprecation warnings <span class="k">for</span>
+                              upcoming unsupported Pythons.
+  --use-feature &lt;feature&gt;     Enable new functionality, that may be
+                              backward incompatible.
+  --use-deprecated &lt;feature&gt;  Enable deprecated functionality, that
+                              will be removed in the future.
+<span class="o">[</span>root@localhost bin<span class="o">]</span><span class="c1"># Python环境安装完毕</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="maven项构建和管理具安装">MAVEN项⽬构建和管理⼯具安装</h2>
+<h3 id="创建目录解压换源">创建目录解压换源</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#创建文件夹</span>
+<span class="o">[</span>root@localhost /<span class="o">]</span><span class="c1"># mkdir /opt/maven</span>
+<span class="o">[</span>root@localhost /<span class="o">]</span><span class="c1"># cd /opt/maven</span>
+<span class="c1">#解压</span>
+<span class="o">[</span>root@localhost maven<span class="o">]</span><span class="c1"># tar -zxvf apache-maven-3.8.1-bin.tar.gz </span>
+apache-maven-3.8.1/README.txt
+apache-maven-3.8.1/LICENSE
+<span class="o">[</span>root@localhost maven<span class="o">]</span><span class="c1"># ll</span>
+总用量 <span class="m">9316</span>
+drwxr-xr-x <span class="m">6</span> root root      <span class="m">99</span> 6月  <span class="m">23</span> 03:29 apache-maven-3.8.1
+-rw-r--r-- <span class="m">1</span> root root <span class="m">9536838</span> 6月  <span class="m">23</span> 03:29 apache-maven-3.8.1-bin.tar.gz
+<span class="o">[</span>root@localhost maven<span class="o">]</span><span class="c1"># cd apache-maven-3.8.1/conf/</span>
+换国内源
+<span class="o">[</span>root@localhost conf<span class="o">]</span><span class="c1"># vim settings.xml </span>
+<span class="c1">#在文件里 &lt;mirrors&gt;&lt;/mirrors&gt; 标签之间加入以下内容,注意缩进</span>
+&lt;mirror&gt;
+ &lt;id&gt;alimaven&lt;/id&gt;
+ &lt;name&gt;aliyun maven&lt;/name&gt;
+ &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;
+ &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+&lt;/mirror&gt;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="配置环境变量">配置环境变量</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost conf<span class="o">]</span><span class="c1"># vim /etc/profile</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/RuoYi/image-20210623040033124.png" alt="image-20210623040033124"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#配置生效</span>
+<span class="o">[</span>root@localhost conf<span class="o">]</span><span class="c1"># source /etc/profile</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="验证安装-3">验证安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@localhost /]# mvn -v
+Apache Maven 3.8.1 (05c21c65bdfed0f71a2f2ada8b84da59348c4c5d)
+Maven home: /opt/maven/apache-maven-3.8.1
+Java version: 1.8.0_291, vendor: Oracle Corporation, runtime: /usr/local/java/jdk1.8.0_291/jre
+Default locale: zh_CN, platform encoding: UTF-8
+OS name: &#34;linux&#34;, version: &#34;3.10.0-1160.31.1.el7.x86_64&#34;, arch: &#34;amd64&#34;, family: &#34;unix&#34;
+[root@localhost /]# MAVEN安装完毕
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">Linux</a>
+          <a href="/tags/java/">JAVA</a>
+          <a href="/tags/python/">Python</a>
+          <a href="/tags/git/">Git</a>
+          <a href="/tags/node/">Node</a>
+          <a href="/tags/maven/">Maven</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E7%94%A8typora%E7%BC%96%E8%BE%91hugo%E5%B8%96%E5%AD%90%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">用Typora软件在本地编辑HUGO帖子插入图片</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E8%AE%BE%E7%BD%AEyum%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%90%8E%E4%BF%9D%E7%95%99rpm%E5%8C%85/">
+            <span class="next-text nav-default">设置yum安装软件后保留RPM包</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'xejwJ1mqtIJ6JAnKlCXzHODQ-gzGzoHsz',
+        appKey: 'WGB8ABQxGRsIT5gndRGMIMxg',
+        notify:  false ,
+        verify:  false ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://wyc1282.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Wang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

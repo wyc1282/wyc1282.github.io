@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://wyc1282.github.io/sitemap.xml

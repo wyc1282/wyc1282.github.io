@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>node.js on 野生猿的笔记</title>
+    <link>https://wyc1282.github.io/tags/node.js/</link>
+    <description>Recent content in node.js on 野生猿的笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 27 Jun 2021 20:23:19 +0800</lastBuildDate><atom:link href="https://wyc1282.github.io/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker环境下的前后端分离项目部署(一)</title>
+      <link>https://wyc1282.github.io/post/docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Sun, 27 Jun 2021 20:23:19 +0800</pubDate>
+      
+      <guid>https://wyc1282.github.io/post/docker%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
