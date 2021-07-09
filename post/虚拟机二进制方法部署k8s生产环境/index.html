@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>虚拟机二进制方法部署K8S生产环境 - 野生猿的笔记</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Wang" /><meta name="description" content="" /><meta name="keywords" content="虚拟机, kubernetes, 虚拟机, 部署" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.84.0 with theme even" />
+
+
+<link rel="canonical" href="https://wyc1282.github.io/post/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2k8s%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.2e81bbed97b8b282c1aeb57488cc71c8d8c8ec559f3931531bd396bf31e0d4dd.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="虚拟机二进制方法部署K8S生产环境" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://wyc1282.github.io/post/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2k8s%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-08T17:06:32&#43;08:00" />
+<meta property="article:modified_time" content="2021-07-08T17:06:32&#43;08:00" />
+
+<meta itemprop="name" content="虚拟机二进制方法部署K8S生产环境">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2021-07-08T17:06:32&#43;08:00" />
+<meta itemprop="dateModified" content="2021-07-08T17:06:32&#43;08:00" />
+<meta itemprop="wordCount" content="4275">
+<meta itemprop="keywords" content="虚拟机,kubernetes,虚拟机,部署," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="虚拟机二进制方法部署K8S生产环境"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Wang</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">档案</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">类别</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Wang</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">档案</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">类别</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">虚拟机二进制方法部署K8S生产环境</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-07-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AC%94%E8%AE%B0/"> 笔记 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#虚拟机练习部署k8s生产环境">虚拟机练习部署K8S生产环境</a>
+      <ul>
+        <li><a href="#准备虚拟机">准备虚拟机</a>
+          <ul>
+            <li><a href="#hostname和网络设置">hostname和网络设置</a></li>
+            <li><a href="#关闭selinux-和防火墙">关闭SELINUX 和防火墙</a></li>
+          </ul>
+        </li>
+        <li><a href="#调整系统">调整系统</a>
+          <ul>
+            <li><a href="#xshell连接">xshell连接</a></li>
+            <li><a href="#安装epel-release">安装epel-release</a></li>
+            <li><a href="#在shwh-11上安装bind-dns服务">在shwh-11上安装bind DNS服务</a></li>
+            <li><a href="#在其他节点配置dns为自建dns服务器地址">在其他节点配置DNS为自建DNS服务器地址</a></li>
+            <li><a href="#修改虚拟机网卡dns设置">修改虚拟机网卡DNS设置</a></li>
+          </ul>
+        </li>
+        <li><a href="#准备证书签发环境">准备证书签发环境</a>
+          <ul>
+            <li><a href="#在sdwh-200上安装cfssl证书签发软件">在sdwh-200上安装CFSSL证书签发软件</a></li>
+          </ul>
+        </li>
+        <li><a href="#在2122200节点上安装docker环境">在21,22,200节点上安装docker环境</a>
+          <ul>
+            <li><a href="#安装docker">安装docker</a></li>
+            <li><a href="#配置docker">配置docker</a></li>
+          </ul>
+        </li>
+        <li><a href="#部署docker镜像私有仓库harbor">部署docker镜像私有仓库harbor</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="虚拟机练习部署k8s生产环境">虚拟机练习部署K8S生产环境</h1>
+<h2 id="准备虚拟机">准备虚拟机</h2>
+<h3 id="hostname和网络设置">hostname和网络设置</h3>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/K8S%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1%E5%9B%BE.png" alt="K8S实验设计图"></p>
+<p>默认网关10.4.7.254</p>
+<p>虚拟机1:hostname=shwh-11 IP=10.4.7.11/24</p>
+<p>虚拟机2:hostname=shwh-12 IP=10.4.7.12/24</p>
+<p>虚拟机3:hostname=shwh-21 IP=10.4.7.21/24</p>
+<p>虚拟机4:hostname=shwh-22 IP=10.4.7.22/24</p>
+<p>虚拟机5:hostname=shwh-200 IP=10.4.7.200/24 运维主机</p>
+<p>虚拟机网络设置:</p>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210708171513935.png" alt="image-20210708171513935"></p>
+<p>宿主机VMnet8:</p>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210708171617163.png" alt="image-20210708171617163"></p>
+<h3 id="关闭selinux-和防火墙">关闭SELINUX 和防火墙</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#关闭SELINUX</span>
+<span class="o">[</span>root@shwh-200 ~<span class="o">]</span><span class="c1"># vim /etc/sysconfig/selinux</span>
+
+<span class="c1"># This file controls the state of SELinux on the system.</span>
+<span class="c1"># SELINUX= can take one of these three values:</span>
+<span class="c1">#     enforcing - SELinux security policy is enforced.</span>
+<span class="c1">#     permissive - SELinux prints warnings instead of enforcing.</span>
+<span class="c1">#     disabled - No SELinux policy is loaded.</span>
+<span class="nv">SELINUX</span><span class="o">=</span>disabled
+<span class="c1"># SELINUXTYPE= can take one of three values:</span>
+<span class="c1">#     targeted - Targeted processes are protected,</span>
+<span class="c1">#     minimum - Modification of targeted policy. Only selected processes are protected. </span>
+<span class="c1">#     mls - Multi Level Security protection.</span>
+<span class="nv">SELINUXTYPE</span><span class="o">=</span>targeted
+
+<span class="c1">#防火墙已关闭</span>
+<span class="o">[</span>root@shwh-200 ~<span class="o">]</span><span class="c1"># systemctl status firewalld.service </span>
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/firewalld.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+   Active: inactive <span class="o">(</span>dead<span class="o">)</span>
+     Docs: man:firewalld<span class="o">(</span>1<span class="o">)</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="调整系统">调整系统</h2>
+<h3 id="xshell连接">xshell连接</h3>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210708172327424.png" alt="image-20210708172327424"></p>
+<h3 id="安装epel-release">安装epel-release</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@shwh-200 ~<span class="o">]</span><span class="c1"># yum install -y epel-release</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>安装必要工具</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@shwh-200 ~<span class="o">]</span><span class="c1"># yum install -y wget net-tools telnet tree nmap sysstat lrzsz dos2unix bind-utils </span>
+已安装:
+  bind-utils.x86_64 32:9.11.4-26.P2.el7_9.5             dos2unix.x86_64 0:6.0.3-7.el7           lrzsz.x86_
+  net-tools.x86_64 0:2.0-0.25.20131004git.el7           nmap.x86_64 2:6.40-19.el7               sysstat.x8
+  telnet.x86_64 1:0.17-66.el7                           tree.x86_64 0:1.6.0-10.el7             
+
+作为依赖被安装:
+  GeoIP.x86_64 0:1.5.0-14.el7                                               bind-libs.x86_64 32:9.11.4-26.
+  bind-libs-lite.x86_64 32:9.11.4-26.P2.el7_9.5                             bind-license.noarch 32:9.11.4-
+  geoipupdate.x86_64 0:2.5.0-1.el7                                          libpcap.x86_64 14:1.5.3-12.el7
+  lm_sensors-libs.x86_64 0:3.4.0-8.20160601gitf9185e5.el7                   nmap-ncat.x86_64 2:6.40-19.el7
+
+完毕！
+<span class="o">[</span>root@shwh-200 ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="在shwh-11上安装bind-dns服务">在shwh-11上安装bind DNS服务</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@shwh-11 ~<span class="o">]</span><span class="c1"># yum -y install bind*</span>
+已安装:
+  bind.x86_64 32:9.11.4-26.P2.el7_9.5                 bind-chroot.x86_64 32:9.11.4-26.P2.el7_9.5         
+  bind-devel.x86_64 32:9.11.4-26.P2.el7_9.5           bind-dyndb-ldap.x86_64 0:11.1-7.el7                
+  bind-export-devel.x86_64 32:9.11.4-26.P2.el7_9.5    bind-lite-devel.x86_64 32:9.11.4-26.P2.el7_9.5     
+  bind-pkcs11.x86_64 32:9.11.4-26.P2.el7_9.5          bind-pkcs11-devel.x86_64 32:9.11.4-26.P2.el7_9.5   
+  bind-pkcs11-libs.x86_64 32:9.11.4-26.P2.el7_9.5     bind-pkcs11-utils.x86_64 32:9.11.4-26.P2.el7_9.5   
+  bind-sdb.x86_64 32:9.11.4-26.P2.el7_9.5             bind-sdb-chroot.x86_64 32:9.11.4-26.P2.el7_9.5     
+  bindfs.x86_64 0:1.13.11-1.el7                      
+
+作为依赖被安装:
+  audit-libs-python.x86_64 0:2.8.5-4.el7               checkpolicy.x86_64 0:2.5-8.el7                   
+  keyutils-libs-devel.x86_64 0:1.5.8-3.el7             krb5-devel.x86_64 0:1.15.1-50.el7                
+  libcap-devel.x86_64 0:2.22-11.el7                    libcgroup.x86_64 0:0.41-21.el7                   
+  libcom_err-devel.x86_64 0:1.42.9-19.el7              libkadm5.x86_64 0:1.15.1-50.el7                  
+  libselinux-devel.x86_64 0:2.5-15.el7                 libsemanage-python.x86_64 0:2.5-14.el7           
+  libsepol-devel.x86_64 0:2.5-10.el7                   libverto-devel.x86_64 0:0.2.5-4.el7              
+  openssl-devel.x86_64 1:1.0.2k-21.el7_9               pcre-devel.x86_64 0:8.32-17.el7                  
+  policycoreutils-python.x86_64 0:2.5-34.el7           postgresql-libs.x86_64 0:9.2.24-7.el7_9          
+  python-IPy.noarch 0:0.75-6.el7                       python-ply.noarch 0:3.4-11.el7                   
+  setools-libs.x86_64 0:3.3.8-4.el7                    zlib-devel.x86_64 0:1.2.7-19.el7_9               
+
+完毕！
+
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="备份-namedconf">备份 named.conf</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-11 ~<span class="o">]</span><span class="c1"># cp /etc/named.conf /etc/named.conf.bak</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="主配置文件修改">主配置文件修改</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@shwh-11 ~<span class="o">]</span><span class="c1"># vim /etc/named.conf </span>
+
+//
+// named.conf
+//
+// Provided by Red Hat <span class="nb">bind</span> package to configure the ISC BIND named<span class="o">(</span>8<span class="o">)</span> DNS
+// server as a caching only nameserver <span class="o">(</span>as a localhost DNS resolver only<span class="o">)</span>.
+//
+// See /usr/share/doc/bind*/sample/ <span class="k">for</span> example named configuration files.
+//
+// See the BIND Administrator<span class="err">&#39;</span>s Reference Manual <span class="o">(</span>ARM<span class="o">)</span> <span class="k">for</span> details about the
+// configuration located in /usr/share/doc/bind-<span class="o">{</span>version<span class="o">}</span>/Bv9ARM.html
+
+options <span class="o">{</span>
+	listen-on port <span class="m">53</span> <span class="o">{</span> 10.4.7.11<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+	directory 	<span class="s2">&#34;/var/named&#34;</span><span class="p">;</span>
+	dump-file 	<span class="s2">&#34;/var/named/data/cache_dump.db&#34;</span><span class="p">;</span>
+	statistics-file <span class="s2">&#34;/var/named/data/named_stats.txt&#34;</span><span class="p">;</span>
+	memstatistics-file <span class="s2">&#34;/var/named/data/named_mem_stats.txt&#34;</span><span class="p">;</span>
+	recursing-file  <span class="s2">&#34;/var/named/data/named.recursing&#34;</span><span class="p">;</span>
+	secroots-file   <span class="s2">&#34;/var/named/data/named.secroots&#34;</span><span class="p">;</span>
+	allow-query     <span class="o">{</span> any<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+	forwarders <span class="o">{</span> 10.4.7.254<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+	
+	recursion yes<span class="p">;</span>
+	dnssec-enable no<span class="p">;</span>
+	dnssec-validation no<span class="p">;</span>
+
+	/* Path to ISC DLV key */
+	bindkeys-file <span class="s2">&#34;/etc/named.root.key&#34;</span><span class="p">;</span>
+
+	managed-keys-directory <span class="s2">&#34;/var/named/dynamic&#34;</span><span class="p">;</span>
+
+	pid-file <span class="s2">&#34;/run/named/named.pid&#34;</span><span class="p">;</span>
+	session-keyfile <span class="s2">&#34;/run/named/session.key&#34;</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+
+logging <span class="o">{</span>
+        channel default_debug <span class="o">{</span>
+                file <span class="s2">&#34;data/named.run&#34;</span><span class="p">;</span>
+                severity dynamic<span class="p">;</span>
+        <span class="o">}</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+
+zone <span class="s2">&#34;.&#34;</span> IN <span class="o">{</span>
+	<span class="nb">type</span> hint<span class="p">;</span>
+	file <span class="s2">&#34;named.ca&#34;</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+
+include <span class="s2">&#34;/etc/named.rfc1912.zones&#34;</span><span class="p">;</span>
+include <span class="s2">&#34;/etc/named.root.key&#34;</span><span class="p">;</span>
+
+
+<span class="c1">#检查配置是否正确</span>
+<span class="o">[</span>root@shwh-11 ~<span class="o">]</span><span class="c1"># named-checkconf</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="区域配置文件修改">区域配置文件修改</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@shwh-11 named<span class="o">]</span><span class="c1"># vim /etc/named.rfc1912.zones</span>
+<span class="c1">#粘贴到最后.正向代理</span>
+zone <span class="s2">&#34;host.com&#34;</span> IN <span class="o">{</span>
+	<span class="nb">type</span>	master<span class="p">;</span>
+	file	<span class="s2">&#34;host.com.zone&#34;</span><span class="p">;</span>
+	allow-update <span class="o">{</span> 10.4.7.11<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+
+zone <span class="s2">&#34;od.com&#34;</span> IN <span class="o">{</span>
+	<span class="nb">type</span>	master<span class="p">;</span>
+	file	<span class="s2">&#34;od.com.zone&#34;</span><span class="p">;</span>
+	allow-update <span class="o">{</span> 10.4.7.11<span class="p">;</span> <span class="o">}</span><span class="p">;</span>
+<span class="o">}</span><span class="p">;</span>
+
+<span class="c1">#验证</span>
+<span class="o">[</span>root@sdwh-11 named<span class="o">]</span><span class="c1"># named-checkconf</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="配置主机域数据文件">配置主机域数据文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@shwh-11 named<span class="o">]</span><span class="c1"># vim /var/named/host.com.zone</span>
+<span class="nv">$TTL</span> 1D
+@	IN SOA	dns.host.com admin.host.com. <span class="o">(</span>
+					0	<span class="p">;</span> serial
+					1D	<span class="p">;</span> refresh
+					1H	<span class="p">;</span> retry
+					1W	<span class="p">;</span> expire
+					3H <span class="o">)</span>	<span class="p">;</span> minimum
+@	IN	NS	dns
+dns	IN	A	10.4.7.11
+SDWH-11	IN	A	10.4.7.11
+SDWH-12	IN	A	10.4.7.12
+SDWH-21	IN	A	10.4.7.21
+SDWH-22	IN	A	10.4.7.22
+SDWH-200	IN	A	10.4.7.200
+<span class="c1">#验证</span>
+<span class="o">[</span>root@sdwh-11 named<span class="o">]</span><span class="c1"># named-checkzone &#34;host.com.zone&#34; ./host.com.zone </span>
+zone host.com.zone/IN: loaded serial <span class="m">0</span>
+OK
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="配置业务域数据文件">配置业务域数据文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@shwh-11 named<span class="o">]</span><span class="c1"># vim /var/named/od.com.zone</span>
+
+<span class="nv">$TTL</span> 1D
+@	IN SOA	dns.od.com admin.od.com. <span class="o">(</span>
+					0	<span class="p">;</span> serial
+					1D	<span class="p">;</span> refresh
+					1H	<span class="p">;</span> retry
+					1W	<span class="p">;</span> expire
+					3H <span class="o">)</span><span class="p">;</span> minimum
+@	IN	NS	dns
+dns	IN	A	10.4.7.11
+
+
+<span class="c1">#检查</span>
+<span class="o">[</span>root@sdwh-11 named<span class="o">]</span><span class="c1"># named-checkzone &#34;od.com.zone&#34; ./od.com.zone </span>
+zone od.com.zone/IN: loaded serial <span class="m">0</span>
+OK
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="启动bind">启动bind</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh7-11 named<span class="o">]</span><span class="c1"># systemctl start named</span>
+<span class="c1">#检测启动情况</span>
+
+<span class="o">[</span>root@sdwh-11 named<span class="o">]</span><span class="c1"># netstat -luntp |grep 53</span>
+tcp        <span class="m">0</span>      <span class="m">0</span> 10.4.7.11:53            0.0.0.0:*               LISTEN      15306/named         
+tcp        <span class="m">0</span>      <span class="m">0</span> 127.0.0.1:953           0.0.0.0:*               LISTEN      15306/named         
+tcp6       <span class="m">0</span>      <span class="m">0</span> ::1:953                 :::*                    LISTEN      15306/named         
+udp        <span class="m">0</span>      <span class="m">0</span> 10.4.7.11:53            0.0.0.0:*  
+</code></pre></td></tr></table>
+</div>
+</div><p><code>#启动服务要是发生报错,systemctl status named能看见相应的问题在哪.</code></p>
+<h4 id="使用dig工具检查">使用dig工具检查</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-11 named<span class="o">]</span><span class="c1"># dig -t A SDWH-21.host.com @10.4.7.11 +short</span>
+10.4.7.21
+<span class="o">[</span>root@sdwh-11 named<span class="o">]</span><span class="c1"># dig -t A sdwh-21.host.com @10.4.7.11 +short</span>
+10.4.7.21
+<span class="o">[</span>root@sdwh-11 named<span class="o">]</span><span class="c1"># dig -t A sdwh-22.host.com @10.4.7.11 +short</span>
+10.4.7.22
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="修改网络dns配置">修改网络DNS配置</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#修改DNS1</span>
+<span class="o">[</span>root@sdwh-11 /<span class="o">]</span><span class="c1"># vim /etc/sysconfig/network-scripts/ifcfg-ens33</span>
+...
+<span class="nv">TYPE</span><span class="o">=</span>Ethernet
+<span class="nv">PROXY_METHOD</span><span class="o">=</span>none
+<span class="nv">BROWSER_ONLY</span><span class="o">=</span>no
+<span class="nv">BOOTPROTO</span><span class="o">=</span>none
+<span class="nv">DEFROUTE</span><span class="o">=</span>yes
+<span class="nv">IPV4_FAILURE_FATAL</span><span class="o">=</span>no
+<span class="nv">IPV6INIT</span><span class="o">=</span>yes
+<span class="nv">IPV6_AUTOCONF</span><span class="o">=</span>yes
+<span class="nv">IPV6_DEFROUTE</span><span class="o">=</span>yes
+<span class="nv">IPV6_FAILURE_FATAL</span><span class="o">=</span>no
+<span class="nv">IPV6_ADDR_GEN_MODE</span><span class="o">=</span>stable-privacy
+<span class="nv">NAME</span><span class="o">=</span>ens33
+<span class="nv">UUID</span><span class="o">=</span>cc752176-5431-4b79-bbde-c34aed83cb5e
+<span class="nv">DEVICE</span><span class="o">=</span>ens33
+<span class="nv">ONBOOT</span><span class="o">=</span>yes
+<span class="nv">IPADDR</span><span class="o">=</span>10.4.7.11
+<span class="nv">PREFIX</span><span class="o">=</span><span class="m">24</span>
+<span class="nv">GATEWAY</span><span class="o">=</span>10.4.7.254
+<span class="nv">DNS1</span><span class="o">=</span>10.4.7.11 <span class="c1">#修改</span>
+~   
+...
+
+<span class="o">[</span>root@sdwh-11 /<span class="o">]</span><span class="c1"># systemctl restart network</span>
+<span class="o">[</span>root@sdwh-11 /<span class="o">]</span><span class="c1"># nmcli </span>
+ens33: 已连接 to ens33
+        <span class="s2">&#34;Intel 82545EM&#34;</span>
+        ethernet <span class="o">(</span>e1000<span class="o">)</span>, 00:0C:29:A7:AE:18, 硬件, mtu <span class="m">1500</span>
+        ip4 默认
+        inet4 10.4.7.11/24
+        route4 10.4.7.0/24
+        route4 0.0.0.0/0
+        inet6 fe80::d0d:b1bc:7792:37b0/64
+        inet6 fe80::4b0e:7c09:77bc:732f/64
+        inet6 fe80::7f03:38a2:e871:f067/64
+        route6 fe80::/64
+        route6 ff00::/8
+
+lo: 未托管
+        <span class="s2">&#34;lo&#34;</span>
+        loopback <span class="o">(</span>unknown<span class="o">)</span>, 00:00:00:00:00:00, 软件, mtu <span class="m">65536</span>
+
+DNS configuration:
+        servers: 10.4.7.11
+        interface: ens33
+
+使用 <span class="s2">&#34;nmcli device show&#34;</span> 获取关于已知设备的完整信息，以及 
+<span class="s2">&#34;nmcli connection show&#34;</span> 获取活动连接配置集的概述。
+
+完整的用法细节，可参考 nmcli<span class="o">(</span>1<span class="o">)</span> 和 nmcli-examples<span class="o">(</span>7<span class="o">)</span> 手册页。
+<span class="o">[</span>root@sdwh-11 /<span class="o">]</span><span class="c1"># </span>
+<span class="c1">#验证外网解析</span>
+<span class="o">[</span>root@sdwh-11 /<span class="o">]</span><span class="c1"># ping www.baidu.com</span>
+ping: www.baidu.com: 未知的名称或服务
+无法解析外网域名可能是配置文件有问题
+
+<span class="o">[</span>root@sdwh-11 ~<span class="o">]</span><span class="c1"># ping baidu.com</span>
+PING baidu.com <span class="o">(</span>220.181.38.148<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from 220.181.38.148 <span class="o">(</span>220.181.38.148<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">128</span> <span class="nv">time</span><span class="o">=</span>24.3 ms
+<span class="m">64</span> bytes from 220.181.38.148 <span class="o">(</span>220.181.38.148<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">128</span> <span class="nv">time</span><span class="o">=</span>24.6 ms
+--- baidu.com ping statistics ---
+<span class="m">8</span> packets transmitted, <span class="m">8</span> received, 0% packet loss, <span class="nb">time</span> 7021ms
+rtt min/avg/max/mdev <span class="o">=</span> 24.221/24.559/25.105/0.350 ms
+<span class="c1">#验证内网解析</span>
+<span class="o">[</span>root@sdwh-11 ~<span class="o">]</span><span class="c1"># ping sdwh-22.host.com</span>
+PING SDWH-22.host.com <span class="o">(</span>10.4.7.22<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from 10.4.7.22 <span class="o">(</span>10.4.7.22<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.591 ms
+<span class="m">64</span> bytes from 10.4.7.22 <span class="o">(</span>10.4.7.22<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.281 ms
+--- SDWH-22.host.com ping statistics ---
+<span class="m">3</span> packets transmitted, <span class="m">3</span> received, 0% packet loss, <span class="nb">time</span> 2026ms
+rtt min/avg/max/mdev <span class="o">=</span> 0.281/0.770/1.440/0.490 ms
+<span class="o">[</span>root@sdwh-11 ~<span class="o">]</span><span class="c1"># </span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="在其他节点配置dns为自建dns服务器地址">在其他节点配置DNS为自建DNS服务器地址</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh- /<span class="o">]</span><span class="c1"># vim /etc/sysconfig/network-scripts/ifcfg-ens33</span>
+...
+<span class="nv">DNS1</span><span class="o">=</span>10.4.7.11 <span class="c1">#修改</span>
+...
+
+<span class="c1">#验证</span>
+<span class="o">[</span>root@sdwh-12 ~<span class="o">]</span><span class="c1"># ping baidu.com</span>
+PING baidu.com <span class="o">(</span>220.181.38.148<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from 220.181.38.148 <span class="o">(</span>220.181.38.148<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">128</span> <span class="nv">time</span><span class="o">=</span>24.8 ms
+<span class="m">64</span> bytes from 220.181.38.148 <span class="o">(</span>220.181.38.148<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">128</span> <span class="nv">time</span><span class="o">=</span>25.2 ms
+--- baidu.com ping statistics ---
+<span class="m">8</span> packets transmitted, <span class="m">8</span> received, 0% packet loss, <span class="nb">time</span> 7021ms
+rtt min/avg/max/mdev <span class="o">=</span> 22.962/24.688/25.222/0.696 ms
+<span class="o">[</span>root@sdwh-12 ~<span class="o">]</span><span class="c1"># ping sdwh-11.host.com</span>
+PING SDWH-11.host.com <span class="o">(</span>10.4.7.11<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from 10.4.7.11 <span class="o">(</span>10.4.7.11<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.095 ms
+<span class="m">64</span> bytes from 10.4.7.11 <span class="o">(</span>10.4.7.11<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.306 ms
+--- SDWH-11.host.com ping statistics ---
+<span class="m">2</span> packets transmitted, <span class="m">2</span> received, 0% packet loss, <span class="nb">time</span> 1003ms
+rtt min/avg/max/mdev <span class="o">=</span> 0.095/0.200/0.306/0.106 ms
+<span class="o">[</span>root@sdwh-12 ~<span class="o">]</span><span class="c1"># ping sdwh-22.host.com</span>
+PING SDWH-22.host.com <span class="o">(</span>10.4.7.22<span class="o">)</span> 56<span class="o">(</span>84<span class="o">)</span> bytes of data.
+<span class="m">64</span> bytes from 10.4.7.22 <span class="o">(</span>10.4.7.22<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.997 ms
+<span class="m">64</span> bytes from 10.4.7.22 <span class="o">(</span>10.4.7.22<span class="o">)</span>: <span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span> <span class="nv">ttl</span><span class="o">=</span><span class="m">64</span> <span class="nv">time</span><span class="o">=</span>0.400 ms
+--- SDWH-22.host.com ping statistics ---
+<span class="m">3</span> packets transmitted, <span class="m">3</span> received, 0% packet loss, <span class="nb">time</span> 2017ms
+rtt min/avg/max/mdev <span class="o">=</span> 0.226/0.541/0.997/0.330 ms
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="修改虚拟机网卡dns设置">修改虚拟机网卡DNS设置</h3>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210709224432656.png" alt="image-20210709224432656"></p>
+<h4 id="宿主机上验证">宿主机上验证</h4>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210709224545109.png" alt="image-20210709224545109"></p>
+<h2 id="准备证书签发环境">准备证书签发环境</h2>
+<h3 id="在sdwh-200上安装cfssl证书签发软件">在sdwh-200上安装CFSSL证书签发软件</h3>
+<p>下载软件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-200 bin<span class="o">]</span><span class="c1"># wget https://github.com/cloudflare/cfssl/releases/download/1.2.0/cfssl_linux-amd64 -O /usr/bin/cfssl</span>
+
+<span class="o">[</span>root@sdwh-200 bin<span class="o">]</span><span class="c1"># wget https://github.com/cloudflare/cfssl/releases/download/1.2.0/cfssl-certinfo_linux-amd64 -O /usr/bin/cfssl-certinfo</span>
+
+<span class="o">[</span>root@sdwh-200 bin<span class="o">]</span><span class="c1"># wget https://github.com/cloudflare/cfssl/releases/download/1.2.0/cfssljson_linux-amd64 -O /usr/bin/cfssl-json</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>增加执行权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-200 bin<span class="o">]</span><span class="c1"># chmod +x /usr/bin/cfssl*</span>
+<span class="o">[</span>root@sdwh-200 bin<span class="o">]</span><span class="c1"># ll /usr/bin/cfssl*</span>
+-rwxr-xr-x <span class="m">1</span> root root <span class="m">10376657</span> 4月  <span class="m">17</span> 03:17 /usr/bin/cfssl
+-rwxr-xr-x <span class="m">1</span> root root  <span class="m">6595195</span> 4月  <span class="m">17</span> 03:17 /usr/bin/cfssl-certinfo
+-rwxr-xr-x <span class="m">1</span> root root  <span class="m">2277873</span> 4月  <span class="m">17</span> 03:17 /usr/bin/cfssl-json
+<span class="o">[</span>root@sdwh-200 bin<span class="o">]</span><span class="c1"># </span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>签发证书</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">创建目录
+[root@sdwh-200 bin]# cd /opt/
+[root@sdwh-200 opt]# mkdir certs
+[root@sdwh-200 opt]# cd certs/
+
+</code></pre></td></tr></table>
+</div>
+</div><p>创建CA证书/权威证书请求文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-200 certs<span class="o">]</span><span class="c1"># touch ca-csr.json</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>编辑请求文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;CN&#34;</span><span class="p">:</span> <span class="s2">&#34;Langwang&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;hosts&#34;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">],</span>
+  <span class="nt">&#34;key&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;algo&#34;</span><span class="p">:</span> <span class="s2">&#34;rsa&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;size&#34;</span><span class="p">:</span> <span class="mi">2048</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;names&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&#34;C&#34;</span><span class="p">:</span>  <span class="s2">&#34;CN&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;L&#34;</span><span class="p">:</span>  <span class="s2">&#34;weihai&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;O&#34;</span><span class="p">:</span>  <span class="s2">&#34;Lao Wang, Inc.&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;OU&#34;</span><span class="p">:</span> <span class="s2">&#34;asd&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;ST&#34;</span><span class="p">:</span> <span class="s2">&#34;shangdong&#34;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&#34;ca&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;expiry&#34;</span><span class="p">:</span> <span class="s2">&#34;175200h&#34;</span>  <span class="err">//用Kuberadmin</span> <span class="err">自动部署的自签证书有效期为</span><span class="mi">1</span><span class="err">年</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>生成CA证书和私钥</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@sdwh-200 certs<span class="o">]</span><span class="c1"># cfssl gencert -initca ca-csr.json | cfssl-json  -bare ca</span>
+2021/07/09 23:35:54 <span class="o">[</span>INFO<span class="o">]</span> generating a new CA key and certificate from CSR
+2021/07/09 23:35:54 <span class="o">[</span>INFO<span class="o">]</span> generate received request
+2021/07/09 23:35:54 <span class="o">[</span>INFO<span class="o">]</span> received CSR
+2021/07/09 23:35:54 <span class="o">[</span>INFO<span class="o">]</span> generating key: rsa-2048
+2021/07/09 23:35:54 <span class="o">[</span>INFO<span class="o">]</span> encoded CSR
+2021/07/09 23:35:54 <span class="o">[</span>INFO<span class="o">]</span> signed certificate with serial number <span class="m">715234858401819117479975574936422564503948520891</span>
+<span class="o">[</span>root@sdwh-200 certs<span class="o">]</span><span class="c1"># ls</span>
+ca.csr  ca-csr.json  ca-key.pem  ca.pem
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="在2122200节点上安装docker环境">在21,22,200节点上安装docker环境</h2>
+<h3 id="安装docker">安装docker</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-21 ~<span class="o">]</span><span class="c1"># yum install docker -y</span>
+<span class="o">[</span>root@sdwh-22 ~<span class="o">]</span><span class="c1"># yum install docker -y</span>
+<span class="o">[</span>root@sdwh-200 ~<span class="o">]</span><span class="c1"># yum install docker -y</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="配置docker">配置docker</h3>
+<p><code>/etc/docker/daemon.json</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;geraph&#34;</span><span class="p">:</span><span class="s2">&#34;/data/docker&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;storage-driver&#34;</span><span class="p">:</span><span class="s2">&#34;overlay2&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;insecure-registries&#34;</span><span class="p">:[</span><span class="s2">&#34;registry.access.redhat.com&#34;</span><span class="p">,</span><span class="s2">&#34;quay.io&#34;</span><span class="p">,</span><span class="s2">&#34;harbor.od.com&#34;</span><span class="p">],</span> <span class="err">//配置docker的私库地址</span>
+    <span class="nt">&#34;registry-mirrors&#34;</span><span class="p">:[</span><span class="s2">&#34;https://ustc-edu-cn.mirror.aliyuncs.com/&#34;</span><span class="p">],</span> <span class="err">//镜像加速</span>
+    <span class="nt">&#34;bip&#34;</span><span class="p">:</span><span class="s2">&#34;172.7.21.1/24&#34;</span><span class="p">,</span> <span class="err">//设置docker0的IP和子网掩码</span>
+    <span class="nt">&#34;exec-opts&#34;</span><span class="p">:[</span><span class="s2">&#34;native.cgroupdriver=systemd&#34;</span><span class="p">],</span>
+	<span class="nt">&#34;live-restore&#34;</span><span class="p">:</span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>修改完成后reload配置文件,启动docker服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@sdwh-21 ~]# systemctl daemon-reload
+[root@sdwh-21 ~]# systemctl start docker.service
+</code></pre></td></tr></table>
+</div>
+</div><p>启动报错</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-22 docker<span class="o">]</span><span class="c1"># systemctl status docker -l</span>
+● docker.service - Docker Application Container Engine
+   Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/docker.service<span class="p">;</span> disabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+   Active: failed <span class="o">(</span>Result: exit-code<span class="o">)</span> since 六 2021-07-10 01:00:01 CST<span class="p">;</span> 8s ago
+     Docs: http://docs.docker.com
+  Process: <span class="m">12917</span> <span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd-current --add-runtime docker-runc<span class="o">=</span>/usr/libexec/docker/docker-runc-current --default-runtime<span class="o">=</span>docker-runc --exec-opt native.cgroupdriver<span class="o">=</span>systemd --userland-proxy-path<span class="o">=</span>/usr/libexec/docker/docker-proxy-current --init-path<span class="o">=</span>/usr/libexec/docker/docker-init-current --seccomp-profile<span class="o">=</span>/etc/docker/seccomp.json <span class="nv">$OPTIONS</span> <span class="nv">$DOCKER_STORAGE_OPTIONS</span> <span class="nv">$DOCKER_NETWORK_OPTIONS</span> <span class="nv">$ADD_REGISTRY</span> <span class="nv">$BLOCK_REGISTRY</span> <span class="nv">$INSECURE_REGISTRY</span> <span class="nv">$REGISTRIES</span> <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>1/FAILURE<span class="o">)</span>
+ Main PID: <span class="m">12917</span> <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>1/FAILURE<span class="o">)</span>
+
+7月 <span class="m">10</span> 01:00:01 sdwh-22.host.com systemd<span class="o">[</span>1<span class="o">]</span>: Starting Docker Application Container Engine...
+7月 <span class="m">10</span> 01:00:01 sdwh-22.host.com dockerd-current<span class="o">[</span>12917<span class="o">]</span>: unable to configure the Docker daemon with file /etc/docker/daemon.json: the following directives are specified both as a flag and in the configuration file: exec-opts: <span class="o">(</span>from flag: <span class="o">[</span>native.cgroupdriver<span class="o">=</span>systemd<span class="o">]</span>, from file: <span class="o">[</span>native.cgroupdriver<span class="o">=</span>systemd<span class="o">])</span>, storage-driver: <span class="o">(</span>from flag: overlay2, from file: overlay2<span class="o">)</span>
+7月 <span class="m">10</span> 01:00:01 sdwh-22.host.com systemd<span class="o">[</span>1<span class="o">]</span>: docker.service: main process exited, <span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>1/FAILURE
+7月 <span class="m">10</span> 01:00:01 sdwh-22.host.com systemd<span class="o">[</span>1<span class="o">]</span>: Failed to start Docker Application Container Engine.
+7月 <span class="m">10</span> 01:00:01 sdwh-22.host.com systemd<span class="o">[</span>1<span class="o">]</span>: Unit docker.service entered failed state.
+7月 <span class="m">10</span> 01:00:01 sdwh-22.host.com systemd<span class="o">[</span>1<span class="o">]</span>: docker.service failed.
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>应该是Docker启动的时候传入了命令行参数，同时也指定了配置文件，两个配置发生了冲突</strong></p>
+<p>编辑<code>/usr/lib/systemd/system/docker.service</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">--exec-opt native.cgroupdriver<span class="o">=</span>systemd <span class="se">\ </span> <span class="c1">#删掉!!!</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以启动</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@sdwh-21 docker]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@sdwh-21 docker]# 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="部署docker镜像私有仓库harbor">部署docker镜像私有仓库harbor</h2>
+<p>下载harbor</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@sdwh-200 docker]# wget https://github.com/goharbor/harbor/releases/download/v1.8.5/harbor-offline-installer-v1.8.5.tgz
+</code></pre></td></tr></table>
+</div>
+</div><p>解压到<code>/opt/</code>并将文件夹重命名为<em>harbor1.8.5</em>后软连接到harbor上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@sdwh-200 opt]# mv harbor/ harbor-1.8.5
+[root@sdwh-200 opt]# ln -s /opt/harbor-1.8.5/ /opt/harbor
+drwxr-xr-x 2 root root  71 7月  10 01:20 certs
+lrwxrwxrwx 1 root root  18 7月  10 01:23 harbor -&gt; /opt/harbor-1.8.5/
+drwxr-xr-x 2 root root 100 7月  10 01:21 harbor-1.8.5
+drwxr-xr-x 2 root root  49 7月  10 01:20 src
+[root@sdwh-200 opt]# cd harbor
+[root@sdwh-200 harbor]# ls
+harbor.v1.8.5.tar.gz  harbor.yml  install.sh  LICENSE  prepare
+</code></pre></td></tr></table>
+</div>
+</div><p>修改<code>/opt/harbor-1.8.5/harbor.yml</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># Configuration file of Harbor</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">harbor.od.com	#修改主机名</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">http</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">180</span><span class="w">	</span><span class="c">#修改端口</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">harbor_admin_password</span><span class="p">:</span><span class="w"> </span><span class="m">123456</span><span class="w">	</span><span class="c">#修改密码</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">database</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="m">123456</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">data_volume</span><span class="p">:</span><span class="w"> </span><span class="l">/data</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">clair</span><span class="p">:</span><span class="w"> 
+</span><span class="w">  </span><span class="nt">updaters_interval</span><span class="p">:</span><span class="w"> </span><span class="m">12</span><span class="w">
+</span><span class="w">  </span><span class="nt">http_proxy</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">https_proxy</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">no_proxy</span><span class="p">:</span><span class="w"> </span><span class="m">127.0.0.1</span><span class="p">,</span><span class="l">localhost,core,registry</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">jobservice</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">max_job_workers</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">chart</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">absolute_url</span><span class="p">:</span><span class="w"> </span><span class="l">disabled</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">log</span><span class="p">:</span><span class="w"> 
+</span><span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l">info</span><span class="w">
+</span><span class="w">  </span><span class="nt">rotate_count</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="w">
+</span><span class="w">  </span><span class="nt">rotate_size</span><span class="p">:</span><span class="w"> </span><span class="l">200M</span><span class="w">
+</span><span class="w">  </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l">/data/log/harbor</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">_version</span><span class="p">:</span><span class="w"> </span><span class="m">1.8.0</span><span class="w">
+</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>安装docker-compose</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># yum install docker-compose -y</span>
+已安装:
+  docker-compose.noarch 0:1.18.0-4.el7                                                                   
+
+作为依赖被安装:
+  libtirpc.x86_64 0:0.2.4-0.16.el7                   python3.x86_64 0:3.6.8-18.el7                       
+  python3-libs.x86_64 0:3.6.8-18.el7                 python3-pip.noarch 0:9.0.3-8.el7                    
+  python3-setuptools.noarch 0:39.2.0-10.el7          python36-PyYAML.x86_64 0:3.13-1.el7                 
+  python36-cached_property.noarch 0:1.5.1-2.el7      python36-chardet.noarch 0:3.0.4-1.el7               
+  python36-docker.noarch 0:2.6.1-3.el7               python36-docker-pycreds.noarch 0:0.2.1-2.el7        
+  python36-dockerpty.noarch 0:0.4.1-18.el7           python36-docopt.noarch 0:0.6.2-8.el7                
+  python36-idna.noarch 0:2.10-1.el7                  python36-jsonschema.noarch 0:2.5.1-4.el7            
+  python36-pysocks.noarch 0:1.6.8-7.el7              python36-requests.noarch 0:2.14.2-2.el7             
+  python36-six.noarch 0:1.14.0-3.el7                 python36-texttable.noarch 0:1.6.2-1.el7             
+  python36-urllib3.noarch 0:1.25.6-2.el7             python36-websocket-client.noarch 0:0.47.0-2.el7     
+
+完毕！
+</code></pre></td></tr></table>
+</div>
+</div><p>安装harbor</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="p">[</span><span class="nx">root</span><span class="err">@</span><span class="nx">sdwh</span><span class="o">-</span><span class="mi">200</span> <span class="nx">harbor</span><span class="p">]</span><span class="err">#</span> <span class="p">.</span><span class="o">/</span><span class="nx">prepare</span> 
+<span class="p">[</span><span class="nx">root</span><span class="err">@</span><span class="nx">sdwh</span><span class="o">-</span><span class="mi">200</span> <span class="nx">harbor</span><span class="p">]</span><span class="err">#</span> <span class="p">.</span><span class="o">/</span><span class="nx">install</span><span class="p">.</span><span class="nx">sh</span> 
+<span class="err">#</span><span class="nx">报错</span>
+<span class="p">[</span><span class="nx">Step</span> <span class="mi">0</span><span class="p">]:</span> <span class="nx">checking</span> <span class="nx">installation</span> <span class="nx">environment</span> <span class="o">...</span>
+<span class="err">✖</span> <span class="nx">Need</span> <span class="nx">to</span> <span class="nx">upgrade</span> <span class="nx">docker</span> <span class="kn">package</span> <span class="nx">to</span> <span class="mf">17.06.0</span><span class="o">+</span><span class="p">.</span>
+
+<span class="err">#</span><span class="nx">查询docker版本</span>
+<span class="p">[</span><span class="nx">root</span><span class="err">@</span><span class="nx">sdwh</span><span class="o">-</span><span class="mi">200</span> <span class="nx">harbor</span><span class="p">]</span><span class="err">#</span> <span class="nx">docker</span> <span class="nx">version</span>
+<span class="nx">Client</span><span class="p">:</span>
+ <span class="nx">Version</span><span class="p">:</span>         <span class="mf">1.13.1</span>
+ <span class="nx">API</span> <span class="nx">version</span><span class="p">:</span>     <span class="mf">1.26</span>
+ <span class="nx">Package</span> <span class="nx">version</span><span class="p">:</span> <span class="nx">docker</span><span class="o">-</span><span class="mf">1.13.1</span><span class="o">-</span><span class="mf">208.</span><span class="nx">git7d71120</span><span class="p">.</span><span class="nx">el7_9</span><span class="p">.</span><span class="nx">x86_64</span>
+ <span class="nx">Go</span> <span class="nx">version</span><span class="p">:</span>      <span class="nx">go1</span><span class="mf">.10.3</span>
+ <span class="nx">Git</span> <span class="nx">commit</span><span class="p">:</span>      <span class="mi">7</span><span class="nx">d71120</span><span class="o">/</span><span class="mf">1.13.1</span>
+ <span class="nx">Built</span><span class="p">:</span>           <span class="nx">Mon</span> <span class="nx">Jun</span>  <span class="mi">7</span> <span class="mi">15</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">09</span> <span class="mi">2021</span>
+ <span class="nx">OS</span><span class="o">/</span><span class="nx">Arch</span><span class="p">:</span>         <span class="nx">linux</span><span class="o">/</span><span class="nx">amd64</span>
+
+<span class="nx">Server</span><span class="p">:</span>
+ <span class="nx">Version</span><span class="p">:</span>         <span class="mf">1.13.1</span>
+ <span class="nx">API</span> <span class="nx">version</span><span class="p">:</span>     <span class="mf">1.26</span> <span class="p">(</span><span class="nx">minimum</span> <span class="nx">version</span> <span class="mf">1.12</span><span class="p">)</span>
+ <span class="nx">Package</span> <span class="nx">version</span><span class="p">:</span> <span class="nx">docker</span><span class="o">-</span><span class="mf">1.13.1</span><span class="o">-</span><span class="mf">208.</span><span class="nx">git7d71120</span><span class="p">.</span><span class="nx">el7_9</span><span class="p">.</span><span class="nx">x86_64</span>
+ <span class="nx">Go</span> <span class="nx">version</span><span class="p">:</span>      <span class="nx">go1</span><span class="mf">.10.3</span>
+ <span class="nx">Git</span> <span class="nx">commit</span><span class="p">:</span>      <span class="mi">7</span><span class="nx">d71120</span><span class="o">/</span><span class="mf">1.13.1</span>
+ <span class="nx">Built</span><span class="p">:</span>           <span class="nx">Mon</span> <span class="nx">Jun</span>  <span class="mi">7</span> <span class="mi">15</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="mi">09</span> <span class="mi">2021</span>
+ <span class="nx">OS</span><span class="o">/</span><span class="nx">Arch</span><span class="p">:</span>         <span class="nx">linux</span><span class="o">/</span><span class="nx">amd64</span>
+ <span class="nx">Experimental</span><span class="p">:</span>    <span class="kc">false</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>查找主机上关于Docker的软件包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># rpm -qa | grep docker </span>
+python36-docker-2.6.1-3.el7.noarch
+docker-client-1.13.1-208.git7d71120.el7_9.x86_64
+python36-docker-pycreds-0.2.1-2.el7.noarch
+docker-common-1.13.1-208.git7d71120.el7_9.x86_64
+docker-1.13.1-208.git7d71120.el7_9.x86_64
+docker-compose-1.18.0-4.el7.noarch
+python36-dockerpty-0.4.1-18.el7.noarch
+</code></pre></td></tr></table>
+</div>
+</div><p>卸载docker</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># yum remove docker-client-1.13.1-208.git7d71120.el7_9.x86_64</span>
+<span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># yum remove docker-common-1.13.1-208.git7d71120.el7_9.x86_64 </span>
+<span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># yum remove docker-common-1.13.1-208.git7d71120.el7_9.x86_64</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用curl升级到最新版</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">curl -fsSL https://get.docker.com/ | sh
+
+[root@sdwh-200 harbor]# docker version
+Client: Docker Engine - Community
+ Version:           20.10.7
+ API version:       1.41
+ Go version:        go1.13.15
+ Git commit:        f0df350
+ Built:             Wed Jun  2 11:58:10 2021
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+</code></pre></td></tr></table>
+</div>
+</div><p>重启docker,执行安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[root@sdwh-200 harbor]# systemctl restart docker
+[root@sdwh-200 harbor]# ./prepare 
+prepare base dir is set to /opt/harbor-1.8.5
+Unable to find image &#39;goharbor/prepare:v1.8.5&#39; locally
+docker: Error response from daemon: Head https://registry-1.docker.io/v2/goharbor/prepare/manifests/v1.8.5: read tcp 10.4.7.200:49244-&gt;54.85.56.253:443: read: connection reset by peer.
+See &#39;docker run --help&#39;.
+[root@sdwh-200 harbor]# ./install.sh 
+
+[Step 0]: checking installation environment ...
+
+Note: docker version: 20.10.7
+
+Note: docker-compose version: 1.18.0
+
+[Step 1]: loading Harbor images ...
+
+...略...
+✔ ----Harbor has been installed and started successfully.----
+
+Now you should be able to visit the admin portal at http://harbor.od.com. 
+For more details, please visit https://github.com/goharbor/harbor .
+
+[root@sdwh-200 harbor]# docker-compose ps
+      Name                     Command               State                 Ports               
+-----------------------------------------------------------------------------------------------
+harbor-core         /harbor/start.sh                 Up                                        
+harbor-db           /entrypoint.sh postgres          Up      5432/tcp                          
+harbor-jobservice   /harbor/start.sh                 Up                                        
+harbor-log          /bin/sh -c /usr/local/bin/ ...   Up      127.0.0.1:1514-&gt;10514/tcp         
+harbor-portal       nginx -g daemon off;             Up      80/tcp                            
+nginx               nginx -g daemon off;             Up      0.0.0.0:180-&gt;80/tcp,:::180-&gt;80/tcp
+redis               docker-entrypoint.sh redis ...   Up      6379/tcp                          
+registry            /entrypoint.sh /etc/regist ...   Up      5000/tcp                         
+registryctl         /harbor/start.sh                 Up                                
+</code></pre></td></tr></table>
+</div>
+</div><p>使用Nginx反向代理</p>
+<p>在<code>/etc/nginx/conf.d</code>新建配置文件<em>harbor.od.com.conf</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+	<span class="kn">listen</span>	<span class="mi">80</span><span class="p">;</span>
+	<span class="kn">server_name</span> <span class="s">harbor.od.com</span><span class="p">;</span>
+
+	<span class="kn">client_max_body_size</span> <span class="mi">1000m</span><span class="p">;</span>
+
+	<span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+
+		<span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:180</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>生效配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># nginx -t</span>
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf <span class="nb">test</span> is successful
+<span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># systemctl start nginx.service </span>
+<span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># systemctl enable nginx.service </span>
+Created symlink from /etc/systemd/system/multi-user.target.wants/nginx.service to /usr/lib/systemd/system/nginx.service.
+</code></pre></td></tr></table>
+</div>
+</div><p>用curl访问</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># curl harbor.od.com</span>
+curl: <span class="o">(</span>6<span class="o">)</span> Could not resolve host: harbor.od.com<span class="p">;</span> 未知的错误
+<span class="c1">#DNS没有配置导致的</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在sdwh-11上/var/named/od.com.zone添加DNS记录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="err">$TTL</span> <span class="mi">1</span><span class="err">D</span>
+<span class="err">@</span>	<span class="err">IN</span> <span class="err">SOA</span>	<span class="err">dns.od.com</span> <span class="err">admin.od.com.</span> <span class="err">(</span>
+					<span class="mi">1</span>	<span class="err">;</span> <span class="err">serial</span>  <span class="err">//序列号前滚</span><span class="mi">1</span>
+					<span class="mi">10800</span>	<span class="err">;</span> <span class="err">refresh</span>
+					<span class="mi">900</span>	<span class="err">;</span> <span class="err">retry</span>
+					<span class="mi">1</span><span class="err">W</span>	<span class="err">;</span> <span class="err">expire</span>
+					<span class="mi">3</span><span class="err">H</span> <span class="err">)</span>	<span class="err">;</span> <span class="err">minimum</span>
+<span class="err">@</span>	<span class="err">IN</span>	<span class="err">NS</span>	<span class="err">dns</span>
+<span class="err">dns</span>	<span class="err">IN</span>	<span class="err">A</span>	<span class="mf">10.4</span><span class="err">.</span><span class="mf">7.11</span>
+<span class="err">harbor</span> <span class="err">IN</span> <span class="err">A</span> <span class="mf">10.4</span><span class="err">.</span><span class="mf">7.200</span>		<span class="err">//新添加的记录</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>重启DNS服务</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-11 named<span class="o">]</span><span class="c1"># systemctl restart named</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>回到sdwh-200上测试一下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-html" data-lang="html">[root@sdwh-200 harbor]# curl harbor.od.com
+<span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Harbor<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">base</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;/&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;viewport&#34;</span> <span class="na">content</span><span class="o">=</span><span class="s">&#34;width=device-width, initial-scale=1&#34;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;icon&#34;</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;image/x-icon&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;favicon.ico?v=2&#34;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;styles.c7cb45f7182182b0f40c.css&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">harbor-app</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;spinner spinner-lg app-loading&#34;</span><span class="p">&gt;</span>
+            Loading...
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">harbor-app</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;runtime.26209474bfa8dc87a77c.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;scripts.3f50235634498feee121.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;main.d844b3cd227b8c02bf2d.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>宿主机浏览器访问http://harbor.od.com</p>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210710022625153.png" alt="image-20210710022625153"></p>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210710022648020.png" alt="image-20210710022648020"></p>
+<p>新建一个项目public</p>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210710022955463.png" alt="image-20210710022955463"></p>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210710023013580.png" alt="image-20210710023013580"></p>
+<p>测试用docker拉一个Nginx1.7.9镜像推送到harbor仓库中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># docker pull nginx:1.7.9</span>
+1.7.9: Pulling from library/nginx
+Image docker.io/library/nginx:1.7.9 uses outdated schema1 manifest format. Please upgrade to a schema2 image <span class="k">for</span> better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/
+a3ed95caeb02: Pull <span class="nb">complete</span> 
+6f5424ebd796: Pull <span class="nb">complete</span> 
+d15444df170a: Pull <span class="nb">complete</span> 
+e83f073daa67: Pull <span class="nb">complete</span> 
+a4d93e421023: Pull <span class="nb">complete</span> 
+084adbca2647: Pull <span class="nb">complete</span> 
+c9cec474c523: Pull <span class="nb">complete</span> 
+Digest: sha256:e3456c851a152494c3e4ff5fcc26f240206abac0c9d794affb40e0714846c451
+Status: Downloaded newer image <span class="k">for</span> nginx:1.7.9
+docker.io/library/nginx:1.7.9
+
+<span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># docker tag 84581e99d807 harbor.od.com/public/nginx:v1.7.9</span>
+
+<span class="c1">#登录一下</span>
+<span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># docker login harbor.od.com</span>
+Username: admin
+Password: <span class="m">123456</span>
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+<span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># docker rmi harbor.od.com/public/nginx</span>
+Error: No such image: harbor.od.com/public/nginx
+<span class="o">[</span>root@sdwh-200 harbor<span class="o">]</span><span class="c1"># docker push harbor.od.com/public/nginx:v1.7.9 </span>
+The push refers to repository <span class="o">[</span>harbor.od.com/public/nginx<span class="o">]</span>
+5f70bf18a086: Pushed 
+4b26ab29a475: Pushed 
+ccb1d68e3fb7: Pushed 
+e387107e2065: Pushed 
+63bf84221cce: Pushed 
+e02dce553481: Pushed 
+dea2e4984e29: Pushed 
+v1.7.9: digest: sha256:b1f5935eb2e9e2ae89c0b3e2e148c19068d91ca502e857052f14db230443e4c2 size: <span class="m">3012</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>浏览器里看一下</p>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210710024113189.png" alt="image-20210710024113189"></p>
+<p><img src="/images/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2K8S%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/image-20210710025129733.png" alt="image-20210710025129733"></p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/">虚拟机</a>
+          <a href="/tags/kubernetes/">kubernetes</a>
+          <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/">虚拟机</a>
+          <a href="/tags/%E9%83%A8%E7%BD%B2/">部署</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+            <span class="next-text nav-default">MySQL配置文详解</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'xejwJ1mqtIJ6JAnKlCXzHODQ-gzGzoHsz',
+        appKey: 'WGB8ABQxGRsIT5gndRGMIMxg',
+        notify:  false ,
+        verify:  false ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://wyc1282.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Wang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

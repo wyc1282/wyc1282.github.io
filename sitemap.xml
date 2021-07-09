@@ -3,7 +3,63 @@
   
   <url>
     <loc>https://wyc1282.github.io/categories/</loc>
-    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
+    <lastmod>2021-07-08T17:06:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/kubernetes/</loc>
+    <lastmod>2021-07-08T17:06:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/</loc>
+    <lastmod>2021-07-08T17:06:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/</loc>
+    <lastmod>2021-07-08T17:06:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/categories/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2021-07-08T17:06:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
+    <lastmod>2021-07-08T17:06:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/post/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%B9%E6%B3%95%E9%83%A8%E7%BD%B2k8s%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2021-07-08T17:06:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/tags/%E9%83%A8%E7%BD%B2/</loc>
+    <lastmod>2021-07-08T17:06:32+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyc1282.github.io/</loc>
+    <lastmod>2021-07-08T17:06:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -17,20 +73,6 @@
   
   <url>
     <loc>https://wyc1282.github.io/post/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</loc>
-    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wyc1282.github.io/post/</loc>
-    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wyc1282.github.io/tags/</loc>
     <lastmod>2021-07-03T16:32:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -52,13 +94,6 @@
   
   <url>
     <loc>https://wyc1282.github.io/categories/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</loc>
-    <lastmod>2021-07-03T16:32:36+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wyc1282.github.io/</loc>
     <lastmod>2021-07-03T16:32:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -128,13 +163,6 @@
   </url>
   
   <url>
-    <loc>https://wyc1282.github.io/categories/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-06-27T20:23:19+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://wyc1282.github.io/tags/ruoyi/</loc>
     <lastmod>2021-06-25T08:13:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -171,13 +199,6 @@
   
   <url>
     <loc>https://wyc1282.github.io/tags/k8s/</loc>
-    <lastmod>2021-04-21T08:22:21+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://wyc1282.github.io/tags/kubernetes/</loc>
     <lastmod>2021-04-21T08:22:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
